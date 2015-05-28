@@ -11,7 +11,7 @@ SocialNetwork.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/home', {
             templateUrl:'templates/partial/home.html',
-            controller:'HomeController'
+            controller:'AuthenticationController'
         })
         .otherwise({redirectTo: '/'});
 }]);
