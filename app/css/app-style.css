@@ -17,9 +17,14 @@ div.table-responsive {
 #requestLink {
     position: relative;
 }
+
 span.newRequests {
     font-size: 15px;
     position: absolute;
     z-index: 10;
     top: 2px;
+}
+
+h4.media-heading {
+    color: #000000;
 }

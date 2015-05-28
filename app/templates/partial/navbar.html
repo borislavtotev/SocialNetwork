@@ -46,21 +46,19 @@
                             <span class="newRequests">{{ pendingRequests }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-settings">
-                            <div class="media">
-                                <a class="media-left" href="#">
-                                    <img src="assets/img/64-64.jpg" alt="" class="img-rounded" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Jhon Deo Alex </h4>
-                                    <h5>Developer & Designer</h5>
-
+                            <div ng-repeat="request in requests">
+                                <div class="media">
+                                        <img src="{{ request['user']['profileImageData'] }}" alt="" class="img-rounded" />
+                                    <div class="media-body">
+                                        <h4 class="media-heading"> {{ request['user']['name'] }}</h4>
+                                    </div>
                                 </div>
+                                <hr />
+                                <button type="submit" class="btn btn-info" ng-click="accept()"></span>Accept</button>
+                                <button type="submit" class="btn btn-info" ng-click="reject()"></span>Reject</button>
+                                <hr />
                             </div>
-                            <hr />
-                            <h5><strong>Personal Bio : </strong></h5>
-                            Anim pariatur cliche reprehen derit.
-                            <hr />
-                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp; <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
+                            <span>{{ pendingRequests }} total requests</span>
                         </div>
                     </li>
                 </ul>
