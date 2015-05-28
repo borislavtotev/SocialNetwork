@@ -1,0 +1,11 @@
+div.user-settings-wrapper {
+    display: inline-block;
+}
+
+#searchResults {
+    text-align: left;
+}
+
+div.table-responsive {
+    padding: 0px;
+}

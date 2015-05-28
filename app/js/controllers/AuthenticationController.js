@@ -1,7 +1,7 @@
 'use strict';
 
 SocialNetwork.controller('AuthenticationController', function ($scope, $location, $route,
-                                                                authentication) {
+                                                                authentication, noteServices) {
 
     var ClearData = function () {
         $scope.loginData = "";
@@ -12,35 +12,31 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
 
     $scope.login = function () {
         authentication.Login($scope.loginData,
-            function(serverData) {
-                console.log("loged in!");
-                //notifyService.showInfo("Successful Login!");
-                //authentication.SetCredentials(serverData);
-                //ClearData();
-                //if(authentication.GetIsAdmin() == "true") {
-                //    $location.path('/admin/home');
-                //} else {
-                //    $location.path('/user/home');
-                //}
+            function (serverData) {
+                noteServices.showInfo("Successful Login!");
+                authentication.SetCredentials(serverData);
+                ClearData();
+                if(authentication.GetIsAdmin() == "true") {
+                    $location.path('/admin/home');
+                } else {
+                    $location.path('/user/home');
+                }
             },
             function (serverError) {
-                console.log(serverError);
-                //notifyService.showError("Unsuccessful Login!", serverError)
+                noteServices.showError("Unsuccessful Login!", serverError)
             });
     };
 
     $scope.register = function () {
         authentication.Register($scope.registerData,
             function(serverData) {
-                console.log("registered");
-                //notifyService.showInfo("Successful Register!");
-                //authentication.SetCredentials(serverData);
-                //ClearData();
-                //$location.path('/user/home');
+                noteServices.showInfo("Successful Register!");
+                authentication.SetCredentials(serverData);
+                ClearData();
+                $location.path('/user/home');
             },
             function (serverError) {
-                console.log(serverError);
-                //notifyService.showError("Unsuccessful Register!", serverError)
+                noteServices.showError("Unsuccessful Register!", serverError)
             });
     };
     //

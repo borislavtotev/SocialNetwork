@@ -5,49 +5,76 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
 
     var serviceUrl = baseServiceUrl + '/users';
 
-    service.Login = function (loginData, success, error) {
+    service.Login = function (loginData, successFunction, errorFunction) {
         $http.post(serviceUrl + '/login', loginData)
             .success(function (data, status, headers, config) {
-                success(data);
-            }).error(error);
+                successFunction(data);
+            })
+            .error(errorFunction);
     };
 
-    service.Register = function (registerData, success, error) {
+    service.Register = function (registerData, successFunction, errorFunction) {
         $http.post(serviceUrl + '/register', registerData)
             .success(function (data, status, headers, config) {
-                success(data);
-            }).error(error);
+                successFunctiondata();
+            })
+            .error(errorFunction);
     };
 
-    service.GetUserProfile = function (success, error) {
-        $http.get(serviceUrl + '/profile', {headers: this.GetHeaders()})
+    service.GetUserFullData = function (userName, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/' + userName, {headers: this.GetHeaders()})
             .success(function (data, status, headers, config) {
-                success(data)
-            }).error(error);
+                successFunction(data)
+            })
+            .error(errorFunction);
     };
 
-    service.EditUserProfile = function (editUserData, success, error) {
+    service.GetUsersByName = function (searchString, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/search?searchTerm=' + searchString, {headers: this.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
+    service.EditUserProfile = function (editUserData, successFunction, errorFunction) {
         $http.put(serviceUrl + '/profile', editUserData, {headers: this.GetHeaders()})
             .success(function (data, status, headers, config) {
-                success(data)
-            }).error(error);
+                successFunction(data)
+            })
+            .error(errorFunction);
     };
 
-    service.ChangePassword = function (passwordData, success, error) {
+    service.ChangePassword = function (passwordData, successFunction, errorFunction) {
         $http.put(serviceUrl + '/ChangePassword', passwordData, {headers: this.GetHeaders()})
             .success(function (data, status, headers, config) {
-                success()
-            }).error(error);
+                successFunction()
+            })
+            .error(errorFunction);
+    };
+
+    function getNameFromProfile (userName, successFunction) {
+        $http.get(serviceUrl + '/' + userName, {headers: service.GetHeaders()})
+            .success(function (data) {
+                successFunction(data['name']);
+            });
     };
 
     service.SetCredentials = function (serverData) {
-        localStorage['accessToken'] = serverData.access_token;
-        localStorage['username'] = serverData.username;
+        localStorage['accessToken'] = serverData['access_token'];
+        localStorage['userName'] = serverData['userName'];
+        getNameFromProfile(serverData['userName'], function(name) {
+            localStorage['name'] = name;
+        });
         localStorage['isAdmin'] = serverData.isAdmin ? serverData.isAdmin : false;
     };
 
     service.GetUsername = function () {
-        return localStorage['username'];
+        return localStorage['userName'];
+    };
+
+    service.GetName = function () {
+        return localStorage['name'];
     };
 
     service.GetIsAdmin = function () {
