@@ -9,3 +9,17 @@ div.user-settings-wrapper {
 div.table-responsive {
     padding: 0px;
 }
+
+.navbar {
+    height: 200px;
+}
+
+#requestLink {
+    position: relative;
+}
+span.newRequests {
+    font-size: 15px;
+    position: absolute;
+    z-index: 10;
+    top: 2px;
+}

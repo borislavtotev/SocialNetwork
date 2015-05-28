@@ -16,7 +16,7 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
     service.Register = function (registerData, successFunction, errorFunction) {
         $http.post(serviceUrl + '/register', registerData)
             .success(function (data, status, headers, config) {
-                successFunctiondata();
+                successFunction(data);
             })
             .error(errorFunction);
     };

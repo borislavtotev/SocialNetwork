@@ -1,12 +1,18 @@
 'use strict';
 
-SocialNetwork.controller('NavigationController', function ($scope, $location, authentication, noteServices) {
+SocialNetwork.controller('NavigationController', function ($scope, $location, authentication, profileServices, noteServices) {
     $scope.search = function () {
         var searchString = $scope.searchString;
 
-        authentication.GetUsersByName(searchString, function (data) {
-            $scope.results = data;
-            console.log(data);
-        });
+        if (searchString) {
+            authentication.GetUsersByName(searchString, function (data) {
+                $scope.results = data;
+            });
+        }
     };
+
+    profileServices.GetFriendsRequests(function(data) {
+        $scope.pendingRequests = data.length;
+        console.log(data.length);
+    });
 });

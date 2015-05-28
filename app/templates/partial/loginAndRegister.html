@@ -1,0 +1,48 @@
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">Please Login or Register To Enter </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form class="form-horizontal" name="loginForm" ng-controller="AuthenticationController" ng-submit="login()">
+                    <fieldset>
+                        <h4> Login with <strong>Social Network Account  :</strong></h4>
+                        <br />
+                        <label>Username : </label>
+                        <input type="text" class="form-control" id="loginUsername" ng-model="loginData.username" required="required"/>
+                        <label>Password :  </label>
+                        <input type="password" class="form-control" id="loginPassword" ng-model="loginData.password" required="required"/>
+                        <hr />
+                        <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Login</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form class="form-horizontal" name="registerForm" ng-controller="AuthenticationController" ng-submit="register()">
+                    <fieldset>
+                        <h4> Register to <strong>Social Network</strong></h4>
+                        <br />
+                        <label>Username : </label>
+                        <input type="text" class="form-control" id="registerUsername" ng-model="registerData.username" required="required"/>
+                        <label>Password :  </label>
+                        <input type="password" class="form-control" id="registerPassword" ng-model="registerData.password" required="required"/>
+                        <label>Confirm Password :  </label>
+                        <input type="password" class="form-control" id="registerConfirmPassword" ng-model="registerData.confirmPassword" required="required"/>
+                        <label>Name : </label>
+                        <input type="text" class="form-control" id="registerName" ng-model="registerData.name" required="required"/>
+                        <label>Email :  </label>
+                        <input type="email" class="form-control" id="registerEmail" ng-model="registerData.email" required="required"/>
+                        <label>Gender:</label><br/>
+                        <input type="radio" id="male" value="male" name="gender" required="required"><label for="male" class="radio-inline">Male</label><br/>
+                        <input type="radio" id="female" value="female" name="gender" required="required"><label for="female" class="radio-inline">Female</label>
+                        <hr />
+                        <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Register</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
