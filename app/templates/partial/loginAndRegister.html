@@ -36,8 +36,8 @@
                         <label>Email :  </label>
                         <input type="email" class="form-control" id="registerEmail" ng-model="registerData.email" required="required"/>
                         <label>Gender:</label><br/>
-                        <input type="radio" id="male" value="male" name="gender" required="required"><label for="male" class="radio-inline">Male</label><br/>
-                        <input type="radio" id="female" value="female" name="gender" required="required"><label for="female" class="radio-inline">Female</label>
+                        <input type="radio" id="male" value="1" name="gender" required="required" ng-model="registerData.gender"><label for="male" class="radio-inline">Male</label><br/>
+                        <input type="radio" id="female" value="2" name="gender" required="required" ng-model="registerData.gender"><label for="female" class="radio-inline">Female</label>
                         <hr />
                         <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-user"></span> &nbsp;Register</button>
                     </fieldset>

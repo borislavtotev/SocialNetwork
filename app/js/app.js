@@ -17,6 +17,10 @@ SocialNetwork.config(['$routeProvider', function ($routeProvider) {
             templateUrl:'templates/partial/allFriends.html',
             controller:'MainController'
         })
+        .when('/profile', {
+            templateUrl:'templates/partial/editProfile.html',
+            controller:'MainController'
+        })
         .when('/profile/password', {
             templateUrl:'templates/partial/changePassword.html',
             controller:'MainController'

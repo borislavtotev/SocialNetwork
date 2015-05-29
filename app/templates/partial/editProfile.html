@@ -1,0 +1,18 @@
+<div ng-include="'templates/partial/header.html'"></div>
+<div class="col-md-6">
+    <form class="form-horizontal" name="registerForm" ng-controller="ProfileController" ng-submit="changeMyProfile()">
+        <fieldset>
+            <h4>Edit profile</h4>
+            <br />
+            <label>Name : </label>
+            <input type="text" class="form-control" id="registerName" ng-model="userData.name" required="required"/>
+            <label>Email :  </label>
+            <input type="email" class="form-control" id="registerEmail" ng-model="userData.email" required="required"/>
+            <label>Gender:</label><br/>
+            <input type="radio" id="male" value="1" name="gender" required="required" ng-model="userData.gender"><label for="male" class="radio-inline">Male</label><br/>
+            <input type="radio" id="female" value="2" name="gender" required="required" ng-model="userData.gender"><label for="female" class="radio-inline">Female</label>
+            <hr />
+            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> &nbsp;Save Changes</button>
+        </fieldset>
+    </form>
+</div>

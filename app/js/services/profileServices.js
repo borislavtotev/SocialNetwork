@@ -5,6 +5,14 @@ SocialNetwork.factory('profileServices', function ($http, baseServiceUrl, authen
 
     var serviceUrl = baseServiceUrl + '/me';
 
+    profileServices.GetMyData = function (successFunction, errorFunction) {
+        $http.get(serviceUrl, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
     profileServices.GetFriendsRequests = function (successFunction, errorFunction) {
         $http.get(serviceUrl + '/requests', {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
@@ -37,8 +45,8 @@ SocialNetwork.factory('profileServices', function ($http, baseServiceUrl, authen
             .error(errorFunction);
     };
 
-    profileServices.EditUserProfile = function (editUserData, successFunction, errorFunction) {
-        $http.put(serviceUrl + '/profile', editUserData, {headers: authentication.GetHeaders()})
+    profileServices.EditMyProfile = function (userData, successFunction, errorFunction) {
+        $http.put(serviceUrl, userData, {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
                 successFunction(data)
             })

@@ -21,4 +21,15 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
                 noteServices.showError("Unsuccessful Password Change!", serverError)
             });
     };
+
+    $scope.changeMyProfile = function () {
+        profileServices.EditMyProfile($scope.userData,
+            function(serverData) {
+                noteServices.showInfo("Successful Edited Profile!");
+                $location.path('/home');
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Edited Profile!", serverError)
+            });
+    };
 });

@@ -8,9 +8,10 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
     $scope.isNotAdmin = (!$scope.isAdmin || $scope.isAdmin == "false");
     if ($scope.username) {
         $scope.isLogged = true;
-        authentication.GetUserFullData($scope.username, function (serverData) {
+        profileServices.GetMyData(function (serverData) {
             $scope.userData = serverData;
-            console.log($scope.userData);
+        }, function (error) {
+            noteServices.showError(error);
         })
     }
 
