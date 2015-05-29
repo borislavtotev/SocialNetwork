@@ -23,6 +23,12 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
     };
 
     $scope.changeMyProfile = function () {
+        var profileImageHtml = document.getElementById('profileImagePreview');
+        $scope.userData.profileImageData = profileImageHtml ? profileImageHtml.currentSrc : "";
+
+        var coverImageHtml = document.getElementById('coverImagePreview');
+        $scope.userData.coverImageData = coverImageHtml ? coverImageHtml.currentSrc : "";
+
         profileServices.EditMyProfile($scope.userData,
             function(serverData) {
                 noteServices.showInfo("Successful Edited Profile!");

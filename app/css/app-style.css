@@ -56,3 +56,18 @@ span.friendName {
     float: left;
     text-align: left;
 }
+
+#profileImagePreview {
+    width: 64px;
+    height: 64px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.navbarCoverImage {
+    height: 100px;
+}
+
+div.left-div, div.container {
+    margin: 0px;
+}

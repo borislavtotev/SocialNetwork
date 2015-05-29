@@ -1,5 +1,4 @@
 SocialNetwork.controller('UploadController',function ($scope, fileReader) {
-    console.log(fileReader);
     $scope.getFile = function (e) {
         $scope.progress = 0;
         fileReader.readAsDataUrl($scope.file, $scope)
