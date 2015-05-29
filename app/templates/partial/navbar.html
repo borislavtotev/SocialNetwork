@@ -6,8 +6,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
-                <img src="{{ userData['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture" />
+            <a class="navbar-brand" href="#/home/">
+                <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
             </a>
             <span style="font-size: 25px;">{{ userData.name }}</span>
         </div>
@@ -29,9 +29,9 @@
                             <span class="newRequests">{{ pendingRequests }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-settings">
-                            <div ng-repeat="request in requests" id="{{ request['id']}}">
+                            <div ng-if="requests.length > 0" ng-repeat="request in requests" id="{{ request['id']}}">
                                 <div class="media">
-                                        <img src="{{ request['user']['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" alt="" class="img-rounded" />
+                                        <img src="{{ request['user']['profileImageData'] ? request['user']['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded" />
                                     <div class="media-body">
                                         <h4 class="media-heading"> {{ request['user']['name'] }}</h4>
                                     </div>
@@ -67,7 +67,7 @@
             <div class="user-settings-wrapper" ng-controller="AuthenticationController">
                 <ul class="nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="../#/home/" aria-expanded="false" ng-click="logout()">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#/home/" aria-expanded="false" ng-click="logout()">
                             <span class="glyphicon glyphicon-log-out" style="font-size: 25px;"></span>
                         </a>
                     </li>
