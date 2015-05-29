@@ -10,4 +10,15 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
     $scope.startNewRow = function (index, count) {
         return ((index) % count) === 0;
     };
+
+    $scope.changePassword = function () {
+        profileServices.ChangePassword($scope.changePasswordData,
+            function() {
+                noteServices.showInfo("Successful Password Change!");
+                $location.path('/home');
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Password Change!", serverError)
+            });
+    };
 });

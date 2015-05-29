@@ -1,9 +1,9 @@
 'use strict';
 
-SocialNetwork.controller('AuthenticationController', function ($scope, $location, $route,
+SocialNetwork.controller('AuthenticationController', function ($scope, $location, $route, $window,
                                                                 authentication, noteServices) {
 
-    var ClearData = function () {
+    $scope.clearData = function () {
         $scope.loginData = "";
         $scope.registerData = "";
         $scope.userData = "";
@@ -15,7 +15,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
             function (serverData) {
                 noteServices.showInfo("Successful Login!");
                 authentication.SetCredentials(serverData);
-                ClearData();
+                $scope.clearData();
                 if(authentication.GetIsAdmin() == "true") {
                     $location.path('/admin/home');
                 } else {
@@ -32,7 +32,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
             function(serverData) {
                 noteServices.showInfo("Successful Register!");
                 authentication.SetCredentials(serverData);
-                ClearData();
+                $scope.clearData();
                 $location.path('/user/home');
             },
             function (serverError) {
@@ -44,7 +44,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
     //    authentication.EditUserProfile($scope.userData,
     //        function(serverData) {
     //            notifyService.showInfo("Successful Profile Edit!");
-    //            ClearData();
+    //            $scope.clearData();
     //            $location.path('/user/home');
     //        },
     //        function (serverError) {
@@ -52,23 +52,12 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
     //        });
     //};
     //
-    //$scope.changePassword = function () {
-    //    authentication.ChangePassword($scope.passwordData,
-    //        function() {
-    //            notifyService.showInfo("Successful Password Change!");
-    //            ClearData();
-    //            $location.path('/user/home');
-    //        },
-    //        function (serverError) {
-    //            notifyService.showError("Unsuccessful Password Change!", serverError)
-    //        });
-    //};
-    //
+
     $scope.logout = function () {
         noteServices.showInfo("Successful Logout!");
-        ClearData();
+        $scope.clearData();
         authentication.ClearCredentials();
-        $route.reload();
+        $location.path('/');
     };
     //
     //$scope.clear = function () {

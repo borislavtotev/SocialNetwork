@@ -37,5 +37,21 @@ SocialNetwork.factory('profileServices', function ($http, baseServiceUrl, authen
             .error(errorFunction);
     };
 
+    profileServices.EditUserProfile = function (editUserData, successFunction, errorFunction) {
+        $http.put(serviceUrl + '/profile', editUserData, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
+    profileServices.ChangePassword = function (passwordData, successFunction, errorFunction) {
+        $http.put(serviceUrl + '/ChangePassword', passwordData, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction()
+            })
+            .error(errorFunction);
+    };
+
     return profileServices;
 });

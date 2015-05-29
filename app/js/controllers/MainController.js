@@ -13,8 +13,9 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
             console.log($scope.userData);
         })
     }
+
     var path = $location.path();
-    if ((path.indexOf("user") != -1) && !authentication.isLoggedIn()) {
+    if ((path.indexOf("home") == -1) && !authentication.isLoggedIn()) {
         $location.path('/');
     }
 });
