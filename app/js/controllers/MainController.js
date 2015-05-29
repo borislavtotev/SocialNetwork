@@ -6,6 +6,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
     $scope.username = authentication.GetUsername();
     $scope.isAdmin = authentication.GetIsAdmin();
     $scope.isNotAdmin = (!$scope.isAdmin || $scope.isAdmin == "false");
+    $scope.path = $location.path();
     if ($scope.username) {
         $scope.isLogged = true;
         profileServices.GetMyData(function (serverData) {
@@ -18,5 +19,14 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
     var path = $location.path();
     if ((path.indexOf("home") == -1) && !authentication.isLoggedIn()) {
         $location.path('/');
+    }
+
+    if (path.indexOf('/users/') != -1 && path.indexOf('friends') == -1 ) {
+        $scope.currentUserName = path.split('/')[2];
+        authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
+            $scope.postsData = wallData;
+        }, function (error) {
+            noteServices.showError(error);
+        })
     }
 });

@@ -38,12 +38,4 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
                 noteServices.showError("Unsuccessful Edited Profile!", serverError)
             });
     };
-
-    function formatProfileImgToBase64() {
-        $scope.profilePhoto = $scope.profilePhoto.base64;
-    }
-
-    function formatCoverImgToBase64() {
-        $scope.coverPhoto = $scope.coverPhoto.base64;
-    }
 });

@@ -9,7 +9,7 @@
             <a class="navbar-brand" href="#/home/">
                 <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
             </a>
-            <span style="font-size: 25px;">{{ userData.name }}</span>
+            <span style="font-size: 25px;"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
         </div>
         <div class="left-div">
             <div class="user-settings-wrapper">

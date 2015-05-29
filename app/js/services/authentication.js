@@ -37,6 +37,14 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
             .error(errorFunction);
     };
 
+    service.GetWallData = function (userName, pageSize, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/' + userName + '/wall?StartPostId=&PageSize=' + pageSize, {headers: this.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
     //function getNameFromProfile (userName, successFunction, errorFunction) {
     //    $http.get(serviceUrl + '/' + userName, {headers: service.GetHeaders()})
     //        .success(function (data) {

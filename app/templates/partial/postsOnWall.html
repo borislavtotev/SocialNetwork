@@ -1,0 +1,18 @@
+<div class="posts col-lg-8">
+    <div class="col-lg-10 col-sm-4">
+        <div class="panel panel-info" ng-repeat="post in postsData">
+            <div class="panel-heading" id="{{post.id}}">
+                <img src="{{ post.author.profileImageData ? post.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <span>{{ post.author.name }}</span><br/>
+                <span>{{ post.date  | date:'d MMM yyyy' }}</span>
+                <span>{{ post.date  | date:'HH:mm:ss' }}</span>
+            </div>
+            <div class="panel-body">
+                <p>{{ post.postContent}}</p>
+            </div>
+            <div class="panel-footer">
+                Likes: {{ post.likesCount}} Comments: {{ post.totalCommentsCount }}
+            </div>
+        </div>
+    </div>
+</div>
