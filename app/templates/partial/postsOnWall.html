@@ -2,7 +2,7 @@
     <div class="col-lg-10 col-sm-4">
         <div class="panel panel-info" id="{{post.id}}">
             <div class="panel-heading">
-                <img src="{{ post.author.profileImageData ? post.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <img ng-src="{{ post.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                 <span>{{ post.author.name }}</span><br/>
                 <span>{{ post.date  | date:'d MMM yyyy' }}</span>
                 <span>{{ post.date  | date:'HH:mm:ss' }}</span>
@@ -25,7 +25,7 @@
     <div class="col-lg-10 col-sm-4 comments">
         <div class="panel panel-warning" ng-repeat="comment in post.comments" id="{{comment.id}}">
             <div class="panel-heading">
-                <img src="{{ comment.author.profileImageData ? comment.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <img ng-src="{{ comment.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                 <span>{{ comment.author.name }}</span><br/>
                 <span>{{ comment.date  | date:'d MMM yyyy' }}</span>
                 <span>{{ comment.date  | date:'HH:mm:ss' }}</span>

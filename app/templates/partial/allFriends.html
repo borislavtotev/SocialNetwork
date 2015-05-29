@@ -18,7 +18,7 @@
                      ng-class="{'new-row': startNewRow($index, columnBreak) }"
                      ng-repeat="friend in friends | filter: searchMyFriendsString" ({{ $index + 1 }})>
                     <span class="friendName">{{ friend['name'] }}</span>
-                    <img src="{{ friend['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" alt="" class="img-rounded profilePicture"/>
+                    <img src="{{ friend['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded profilePicture"/>
                 </div>
             </div>
             <div class="panel-body">

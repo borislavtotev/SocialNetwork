@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#/home/">
-                <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <img ng-src="{{ userData['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
             </a>
             <span style="font-size: 25px;"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
         </div>
@@ -15,7 +15,7 @@
             <div class="user-settings-wrapper">
                 <ul class="nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#/home/" aria-expanded="false">
                             <span class="glyphicon glyphicon-comment" style="font-size: 25px;"></span>
                         </a>
                     </li>
@@ -31,7 +31,7 @@
                         <div class="dropdown-menu dropdown-settings">
                             <div ng-if="requests.length > 0" ng-repeat="request in requests" id="{{ request['id']}}">
                                 <div class="media">
-                                        <img src="{{ request['user']['profileImageData'] ? request['user']['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded" />
+                                        <img ng-src="{{ request['user']['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded" />
                                     <div class="media-body">
                                         <h4 class="media-heading"> {{ request['user']['name'] }}</h4>
                                     </div>
@@ -104,7 +104,7 @@
         <div class="col-md-12">
             <img class="col-md-12 navbarCoverImage" src="{{ currentUser ? currentUser['coverImageData'] : userData['coverImageData'] }}"/>
             <div class="currentWallUserInfo col-md-6" ng-if="currentUser">
-                <img src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <img ng-src="{{ currentUser['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                 <span style="font-size: 35px;">{{ currentUser.name }}</span>
             </div>
         </div>
