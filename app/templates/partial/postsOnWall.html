@@ -1,14 +1,21 @@
 <div class="posts col-lg-8" ng-repeat="post in postsData">
     <div class="col-lg-10 col-sm-4">
-        <div class="panel panel-info">
-            <div class="panel-heading" id="{{post.id}}">
+        <div class="panel panel-info" id="{{post.id}}">
+            <div class="panel-heading">
                 <img src="{{ post.author.profileImageData ? post.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                 <span>{{ post.author.name }}</span><br/>
                 <span>{{ post.date  | date:'d MMM yyyy' }}</span>
                 <span>{{ post.date  | date:'HH:mm:ss' }}</span>
+                <div ng-controller="PostController">
+                    <button class="btn btn-primary" ng-if="!postEditorEnabled && userData.name == post.author.name" ng-click="editPost(post)"><i class="fa fa-edit "></i> Edit</button>
+                    <button class="btn btn-danger" ng-if="!postEditorEnabled && userData.name == post.author.name" ng-click="deletePost(post)"><i class="fa fa-pencil"></i> Delete</button>
+                </div>
             </div>
-            <div class="panel-body">
-                <p>{{ post.postContent}}</p>
+            <div class="panel-body" ng-controller="PostController">
+                <p ng-if="!postEditorEnabled">{{ post.postContent}}</p>
+                <textarea ng-if="postEditorEnabled" ng-model="post.postContent"></textarea>
+                <button class="btn btn-success" ng-if="postEditorEnabled" ng-click="saveUpdatedPost(post)">Save</button>
+                <button class="btn btn-default" ng-if="postEditorEnabled" ng-click="cancelEditPost()">Cancel</button>
             </div>
             <div class="panel-footer">
                 Likes: {{ post.likesCount}} Comments: {{ post.totalCommentsCount }}
@@ -16,12 +23,16 @@
         </div>
     </div>
     <div class="col-lg-10 col-sm-4 comments">
-        <div class="panel panel-warning" ng-repeat="comment in post.comments">
-            <div class="panel-heading" id="{{comment.id}}">
+        <div class="panel panel-warning" ng-repeat="comment in post.comments" id="{{comment.id}}">
+            <div class="panel-heading">
                 <img src="{{ comment.author.profileImageData ? comment.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                 <span>{{ comment.author.name }}</span><br/>
                 <span>{{ comment.date  | date:'d MMM yyyy' }}</span>
                 <span>{{ comment.date  | date:'HH:mm:ss' }}</span>
+                <div ng-controller="PostController">
+                    <button class="btn btn-primary" ng-if="userData.name == comment.author.name" ng-click="editComment()"><i class="fa fa-edit "></i> Edit</button>
+                    <button class="btn btn-danger" ng-if="userData.name == comment.author.name" ng-click="deteleComment()"><i class="fa fa-pencil"></i> Delete</button>
+                </div>
             </div>
             <div class="panel-body">
                 <p>{{ comment.commentContent}}</p>

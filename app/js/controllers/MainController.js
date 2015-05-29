@@ -27,6 +27,15 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
             $scope.postsData = wallData;
         }, function (error) {
             noteServices.showError(error);
-        })
+        });
+
+        authentication.GetUserFullData($scope.currentUserName, function(serverData) {
+            $scope.currentUser = serverData;
+        }, function (error) {
+            noteServices.showError(error);
+        });
+    } else {
+        $scope.currentUser = {};
+        $scope.currentUserName = '';
     }
 });

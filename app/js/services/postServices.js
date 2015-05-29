@@ -22,7 +22,7 @@ SocialNetwork.factory('postServices', function ($http, baseServiceUrl, authentic
     };
 
     postServices.EditPostById = function (postId, postContent, successFunction, errorFunction) {
-        $http.put(serviceUrl + '/' + postId, postContent, {headers: authentication.GetHeaders()})
+        $http.put(serviceUrl + '/' + postId, {"postContent" : postContent}, {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
                 successFunction(data)
             })

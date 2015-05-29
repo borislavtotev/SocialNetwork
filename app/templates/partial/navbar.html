@@ -102,7 +102,11 @@
             </div>
         </div>
         <div class="col-md-12">
-            <img class="col-md-12 navbarCoverImage" src="{{ userData['coverImageData'] }}"/>
+            <img class="col-md-12 navbarCoverImage" src="{{ currentUser ? currentUser['coverImageData'] : userData['coverImageData'] }}"/>
+            <div class="currentWallUserInfo col-md-6" ng-if="currentUser">
+                <img src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <span style="font-size: 35px;">{{ currentUser.name }}</span>
+            </div>
         </div>
     </div>
 </div>
