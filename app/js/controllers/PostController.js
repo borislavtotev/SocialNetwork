@@ -29,20 +29,27 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
             newPostContent = e.postContent;
         postServices.EditPostById(id, newPostContent,
             function() {
-                noteServices.showInfo("Successful Edited Message");
+                noteServices.showInfo("Successful Edited Post");
             },
             function (serverError) {
-                noteServices.showError("Unsuccessful Posted Message!", serverError)
+                noteServices.showError("Unsuccessful Edited Post!", serverError)
             });
         $scope.cancelEditPost();
     };
 
-    $scope.cancelEditPost = function() {
+    $scope.cancelEditPost = function(e) {
         $scope.$parent.postEditorEnabled = false;
         $scope.$parent.editablePostContent = {};
     };
 
-    $scope.deletePost = function () {
-        console.log("delete post");
+    $scope.deletePost = function (e) {
+        postServices.DeletePostById(e.id,
+            function() {
+                noteServices.showInfo("Successful Deleted Post!");
+                document.getElementById(e.id).remove();
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Deleted Post!", serverError)
+            });
     };
 });
