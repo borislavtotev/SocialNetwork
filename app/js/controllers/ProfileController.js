@@ -1,6 +1,6 @@
 'use strict';
 
-SocialNetwork.controller('ProfileController', function ($scope, $location, authentication, profileServices, noteServices) {
+SocialNetwork.controller('ProfileController', function ($scope, $location, authentication, profileServices, noteServices, fileReader) {
     profileServices.GetMyOwnFriends(function (data) {
         $scope.friends = data;
     });
@@ -32,4 +32,12 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
                 noteServices.showError("Unsuccessful Edited Profile!", serverError)
             });
     };
+
+    function formatProfileImgToBase64() {
+        $scope.profilePhoto = $scope.profilePhoto.base64;
+    }
+
+    function formatCoverImgToBase64() {
+        $scope.coverPhoto = $scope.coverPhoto.base64;
+    }
 });

@@ -3,7 +3,7 @@
 SocialNetwork.controller('AuthenticationController', function ($scope, $location, $route, $window,
                                                                 authentication, noteServices) {
 
-    $scope.clearData = function () {
+    var ClearData = function () {
         $scope.loginData = "";
         $scope.registerData = "";
         $scope.userData = "";
@@ -15,8 +15,12 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
             function (serverData) {
                 noteServices.showInfo("Successful Login!");
                 authentication.SetCredentials(serverData);
-                $scope.clearData();
-                $location.path('/home');
+                ClearData();
+                if(authentication.GetIsAdmin() == "true") {
+                    $location.path('/admin/home');
+                } else {
+                    $location.path('/user/home');
+                }
             },
             function (serverError) {
                 noteServices.showError("Unsuccessful Login!", serverError)
@@ -28,7 +32,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
             function(serverData) {
                 noteServices.showInfo("Successful Register!");
                 authentication.SetCredentials(serverData);
-                $scope.clearData();
+                ClearData();
                 $location.path('/home');
             },
             function (serverError) {
@@ -38,7 +42,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
 
     $scope.logout = function () {
         noteServices.showInfo("Successful Logout!");
-        $scope.clearData();
+        ClearData();
         authentication.ClearCredentials();
         $location.path('/');
     };

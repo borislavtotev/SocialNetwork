@@ -12,6 +12,22 @@
             <input type="radio" id="male" value="1" name="gender" required="required" ng-model="userData.gender"><label for="male" class="radio-inline">Male</label><br/>
             <input type="radio" id="female" value="2" name="gender" required="required" ng-model="userData.gender"><label for="female" class="radio-inline">Female</label>
             <hr />
+            <div class="form-group" ng-controller="UploadController">
+                <label for="inputCoverImageData" class="col-md-3 control-label">Profile picture<br/>Limit: 1024kb</label>
+                <div class="col-md-9">
+                    <img class="img-rounded center-block col-lg-9" ng-src="{{profileImage}}"/>
+                    <input type="file"  class="form-control" ng-model="profileImage" base-sixty-four-input
+                           id="profileImage" ng-file-select="onFileSelect($files)">
+                </div>
+            </div>
+            <div class="form-group" ng-controller="UploadController">
+                <label for="inputCoverImageData" class="col-md-3 control-label">Cover picture<br/>Limit: 1024kb</label>
+                <div class="col-md-9">
+                    <img class="img-rounded center-block col-lg-9" ng-src="{{imageSrc}}"/>
+                    <input type="file"  class="form-control" ng-model="imageSrc" base-sixty-four-input
+                           id="imageSrc" ng-file-select="onFileSelect($files)">
+                </div>
+            </div>
             <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-floppy-save"></span> &nbsp;Save Changes</button>
         </fieldset>
     </form>
