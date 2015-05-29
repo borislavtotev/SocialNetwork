@@ -68,6 +68,11 @@ span.friendName {
     height: 100px;
 }
 
-div.left-div, div.container {
+div.left-div, div.container
+{
     margin: 0px;
+}
+
+div.comments {
+    margin-left: 50px;
 }

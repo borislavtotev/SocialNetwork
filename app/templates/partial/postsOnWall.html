@@ -1,6 +1,6 @@
-<div class="posts col-lg-8">
+<div class="posts col-lg-8" ng-repeat="post in postsData">
     <div class="col-lg-10 col-sm-4">
-        <div class="panel panel-info" ng-repeat="post in postsData">
+        <div class="panel panel-info">
             <div class="panel-heading" id="{{post.id}}">
                 <img src="{{ post.author.profileImageData ? post.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                 <span>{{ post.author.name }}</span><br/>
@@ -12,6 +12,22 @@
             </div>
             <div class="panel-footer">
                 Likes: {{ post.likesCount}} Comments: {{ post.totalCommentsCount }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 col-sm-4 comments">
+        <div class="panel panel-warning" ng-repeat="comment in post.comments">
+            <div class="panel-heading" id="{{comment.id}}">
+                <img src="{{ comment.author.profileImageData ? comment.author.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <span>{{ comment.author.name }}</span><br/>
+                <span>{{ comment.date  | date:'d MMM yyyy' }}</span>
+                <span>{{ comment.date  | date:'HH:mm:ss' }}</span>
+            </div>
+            <div class="panel-body">
+                <p>{{ comment.commentContent}}</p>
+            </div>
+            <div class="panel-footer">
+                Likes: {{ comment.likesCount}}
             </div>
         </div>
     </div>
