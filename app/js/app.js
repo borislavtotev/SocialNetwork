@@ -13,5 +13,9 @@ SocialNetwork.config(['$routeProvider', function ($routeProvider) {
             templateUrl:'templates/partial/home.html',
             controller:'MainController'
         })
+        .when('/users/:username/friends', {
+            templateUrl:'templates/partial/allFriends.html',
+            controller:'MainController'
+        })
         .otherwise({redirectTo: '/'});
 }]);

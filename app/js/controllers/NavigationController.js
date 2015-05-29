@@ -14,6 +14,26 @@ SocialNetwork.controller('NavigationController', function ($scope, $location, au
     profileServices.GetFriendsRequests(function(data) {
         $scope.requests = data;
         $scope.pendingRequests = data.length;
-        console.log(data.length);
+        //console.log(data.length);
     });
+
+    $scope.accept = function (event) {
+        var target = angular.element(event.target),
+            requestDiv = target.parent(),
+            requestId = requestDiv[0].getAttribute('id');
+
+            profileServices.ApproveFriendRequest(requestId, function(data) {
+                console.log(data);
+            })
+    };
+
+    $scope.reject = function (event) {
+        var target = angular.element(event.target),
+            requestDiv = target.parent(),
+            requestId = requestDiv[0].getAttribute('id');
+
+        profileServices.RejectFriendRequest(requestId, function(data) {
+            console.log(data);
+        });
+    };
 });

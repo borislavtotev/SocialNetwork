@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.html">
-                <img src="././img/64-64.jpg" />
+                <img src="{{ userData['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture" />
             </a>
             <span style="font-size: 25px;">{{ userData.name }}</span>
         </div>
@@ -46,16 +46,16 @@
                             <span class="newRequests">{{ pendingRequests }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-settings">
-                            <div ng-repeat="request in requests">
+                            <div ng-repeat="request in requests" id="{{ request['id']}}">
                                 <div class="media">
-                                        <img src="{{ request['user']['profileImageData'] }}" alt="" class="img-rounded" />
+                                        <img src="{{ request['user']['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" alt="" class="img-rounded" />
                                     <div class="media-body">
                                         <h4 class="media-heading"> {{ request['user']['name'] }}</h4>
                                     </div>
                                 </div>
                                 <hr />
-                                <button type="submit" class="btn btn-info" ng-click="accept()"></span>Accept</button>
-                                <button type="submit" class="btn btn-info" ng-click="reject()"></span>Reject</button>
+                                <button type="submit" class="btn btn-info" ng-click="accept($event)"></span>Accept</button>
+                                <button type="submit" class="btn btn-info" ng-click="reject($event)"></span>Reject</button>
                                 <hr />
                             </div>
                             <span>{{ pendingRequests }} total requests</span>
@@ -92,7 +92,7 @@
             <div class="user-settings-wrapper">
                 <ul class="nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false">
                             <span class="glyphicon glyphicon-wrench" style="font-size: 25px;"></span>
                         </a>
                         <div class="dropdown-menu dropdown-settings">
@@ -115,29 +115,12 @@
                     </li>
                 </ul>
             </div>
-            <div class="user-settings-wrapper">
+            <div class="user-settings-wrapper" ng-controller="AuthenticationController">
                 <ul class="nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="./#/" aria-expanded="false" ng-click="logout()">
                             <span class="glyphicon glyphicon-log-out" style="font-size: 25px;"></span>
                         </a>
-                        <div class="dropdown-menu dropdown-settings">
-                            <div class="media">
-                                <a class="media-left" href="#">
-                                    <img src="assets/img/64-64.jpg" alt="" class="img-rounded" />
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Jhon Deo Alex </h4>
-                                    <h5>Developer & Designer</h5>
-
-                                </div>
-                            </div>
-                            <hr />
-                            <h5><strong>Personal Bio : </strong></h5>
-                            Anim pariatur cliche reprehen derit.
-                            <hr />
-                            <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp; <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
-                        </div>
                     </li>
                 </ul>
             </div>

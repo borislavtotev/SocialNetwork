@@ -1,6 +1,6 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function ($scope, $location, authentication, noteServices) {
+SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, noteServices) {
 
     $scope.startPage = 1;
     $scope.username = authentication.GetUsername();

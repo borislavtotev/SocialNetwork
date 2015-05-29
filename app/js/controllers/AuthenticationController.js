@@ -64,13 +64,12 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
     //        });
     //};
     //
-    //$scope.logout = function () {
-    //    notifyService.showInfo("Successful Logout!");
-    //    ClearData();
-    //    authentication.ClearCredentials();
-    //    mainData.clearParams();
-    //    $route.reload();
-    //};
+    $scope.logout = function () {
+        noteServices.showInfo("Successful Logout!");
+        ClearData();
+        authentication.ClearCredentials();
+        $route.reload();
+    };
     //
     //$scope.clear = function () {
     //    mainData.clearParams();

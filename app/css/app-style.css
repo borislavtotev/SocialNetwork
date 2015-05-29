@@ -28,3 +28,31 @@ span.newRequests {
 h4.media-heading {
     color: #000000;
 }
+
+div.dropdown-menu {
+    color: #000000;
+}
+
+img.profilePicture {
+    width: 64px;
+    height: 64px;
+}
+
+span.friendName {
+    width: 64px;
+    font-size: 12px;
+    color: darkred;
+}
+
+.table {
+    border: 1px solid #888;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.label {
+    margin-right: 3px;
+    margin-bottom: 3px;
+    float: left;
+    text-align: left;
+}
