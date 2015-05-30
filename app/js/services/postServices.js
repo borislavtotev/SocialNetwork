@@ -45,5 +45,13 @@ SocialNetwork.factory('postServices', function ($http, baseServiceUrl, authentic
             .error(errorFunction);
     };
 
+    postServices.GetAllComments = function (postId, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/' + postId + '/comments', {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
     return postServices;
 });

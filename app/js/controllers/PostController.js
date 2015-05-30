@@ -75,4 +75,18 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
 
         $scope.cancelNewComment();
     };
+
+    $scope.showAllComments = function (e) {
+        var id = e.id;
+
+        postServices.GetAllComments(id,
+            function(allCommentsData) {
+                var newCommentsData = allCommentsData.slice(3, allCommentsData.length);
+                $scope.post.comments.push.apply($scope.post.comments, newCommentsData);
+                document.getElementById(id + 'showMoreCommentsButton').remove();
+            },
+            function (serverError) {
+                noteServices.showError("Unable to get all comments!", serverError)
+            });
+    };
 });

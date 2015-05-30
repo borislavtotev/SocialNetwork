@@ -23,8 +23,8 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-10 col-sm-4 comments" ng-if="addCommentEnabled" ng-controller="PostController">
-        <div class="panel panel-warning newComment" id="{{post.id + NewComment}}">
+        <div class="col-lg-10 col-sm-4 comments" ng-if="addCommentEnabled" ng-controller="PostController">
+        <div class="panel panel-warning newComment" id="{{post.id + 'NewComment'}}">
             <div class="panel-heading">
                 New Comment
             </div>
@@ -55,6 +55,9 @@
             <div class="panel-footer">
                 Likes: {{ comment.likesCount}}
             </div>
+        </div>
+        <div ng-if="post.comments.length >= 3" ng-controller="PostController" class="moreComments" id="{{post.id + 'showMoreCommentsButton'}}">
+            <button class="btn btn-default"  ng-click="showAllComments(post)"><span class="glyphicon glyphicon-collapse-down"></span> &nbsp;Show All Comments</button>
         </div>
     </div>
 </div>
