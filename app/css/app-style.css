@@ -76,3 +76,16 @@ div.left-div, div.container
 div.comments {
     margin-left: 50px;
 }
+
+img.dropdown-toggle.profilePicture.img-rounded:hover {
+    cursor: pointer;
+}
+
+img.dropdown-toggle.profilePicture.img-rounded:hover + div.dropdown-menu, img.dropdown-toggle.profilePicture.img-rounded:focus + div.dropdown-menu {
+    display: block;
+}
+
+img.genderPicture {
+    height: 40px;
+    width: 40px;
+}

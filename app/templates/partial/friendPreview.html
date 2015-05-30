@@ -1,0 +1,9 @@
+<div class="userPreviewInfo col-md-6" ng-controller="ProfileController">
+    <img ng-if="preveiwedUserData" ng-src="{{ preveiwedUserData['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+    <img ng-if="preveiwedUserData.gender == 1" ng-src="'../../img/male-sign.png" class="genderPicture img-rounded" />
+    <img ng-if="preveiwedUserData.gender == 2" ng-src="'../../img/female-sign.jpg" class="genderPicture img-rounded" />
+    <span style="font-size: 15px;">{{ preveiwedUserData.name }}</span>
+    <button class="btn btn-success" ng-if="preveiwedUserData.isFriend" ng-disabled="true">Friend</button>
+    <button class="btn btn-warning" ng-if="preveiwedUserData.hasPendingRequest" ng-disabled="true">Pending</button>
+    <button class="btn btn-primary" ng-if="preveiwedUserData && !preveiwedUserData.hasPendingRequest && !preveiwedUserData.isFriend" ng-click="sendFriendRequest(preveiwedUserData.username)">Invite</button>
+</div>

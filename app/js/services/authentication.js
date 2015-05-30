@@ -29,6 +29,14 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
             .error(errorFunction);
     };
 
+    service.GetUserPreviewData = function (userName, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/' + userName + '/preview', {headers: this.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
     service.GetUsersByName = function (searchString, successFunction, errorFunction) {
         $http.get(serviceUrl + '/search?searchTerm=' + searchString, {headers: this.GetHeaders()})
             .success(function (data, status, headers, config) {

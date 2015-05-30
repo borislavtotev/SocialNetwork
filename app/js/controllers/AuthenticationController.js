@@ -46,6 +46,16 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
         authentication.ClearCredentials();
         $location.path('/');
     };
+
+    $scope.showUserPreviewData = function (username) {
+        authentication.GetUserPreviewData(username,
+            function(serverData) {
+                $scope.preveiwedUserData = serverData;
+            },
+            function (serverError) {
+                noteServices.showError("Unable to get user data", serverError)
+            });
+    };
     //
     //$scope.clear = function () {
     //    mainData.clearParams();

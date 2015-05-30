@@ -38,4 +38,14 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
                 noteServices.showError("Unsuccessful Edited Profile!", serverError)
             });
     };
+
+    $scope.sendFriendRequest = function(username) {
+        profileServices.sendFriendRequest(username,
+            function(serverData) {
+                noteServices.showInfo("Successful Sent Friend Request!");
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Sent Friend Request!", serverError)
+            });
+    }
 });

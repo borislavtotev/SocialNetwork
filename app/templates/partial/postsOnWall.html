@@ -2,8 +2,11 @@
     <div class="col-lg-10 col-sm-4">
         <div class="panel panel-info" id="{{post.id}}">
             <div class="panel-heading">
-                <img ng-src="{{ post.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
-                <span>{{ post.author.name }}</span><br/>
+                <div class="dropdown" ng-controller="AuthenticationController">
+                    <img class="dropdown-toggle profilePicture img-rounded" data-toggle="dropdown" href="" aria-expanded="false" ng-mouseover="showUserPreviewData(post.author.username)" ng-src="{{ post.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" />
+                    <div class="dropdown-menu dropdown-settings" ng-include="'templates/partial/friendPreview.html'"></div>
+                    <span>{{ post.author.name }}</span><br/>
+                </div>
                 <span>{{ post.date  | date:'d MMM yyyy' }}</span>
                 <span>{{ post.date  | date:'HH:mm:ss' }}</span>
                 <div ng-controller="PostController">
