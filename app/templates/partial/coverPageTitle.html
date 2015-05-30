@@ -1,0 +1,6 @@
+<div class="coverPageContainer col-lg-12" back-img="{{ currentUserName != '' ? currentUser['coverImageData'] : userData['coverImageData'] }}">
+    <div class="currentWallUserInfo col-lg-4" ng-if="currentUser">
+        <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
+        <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
+    </div>
+</div>

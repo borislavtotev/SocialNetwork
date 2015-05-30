@@ -53,7 +53,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
         }, function (error) {
             noteServices.showError(error);
         });
-    } else if (path.indexOf("home") != -1) {  // in the home
+    } else if (path.indexOf("home") != -1 && authentication.isLoggedIn()) {  // in the home
         profileServices.GetNewsFeeds(5, function (feedsData) {
             $scope.postsData = feedsData;
         }, function (error) {

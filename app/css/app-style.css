@@ -1,3 +1,7 @@
+div {
+    box-sizing: border-box;
+}
+
 div.user-settings-wrapper {
     display: inline-block;
 }
@@ -11,7 +15,7 @@ div.table-responsive {
 }
 
 .navbar {
-    height: 200px;
+    height: 226px;
 }
 
 #requestLink {
@@ -64,10 +68,6 @@ span.friendName {
     margin: 0px;
 }
 
-.navbarCoverImage {
-    height: 100px;
-}
-
 div.left-div, div.container
 {
     margin: 0px;
@@ -88,4 +88,52 @@ img.dropdown-toggle.profilePicture.img-rounded:hover + div.dropdown-menu, img.dr
 img.genderPicture {
     height: 40px;
     width: 40px;
+}
+
+header {
+    padding: 0px;!important;
+}
+
+div.coverPageContainer, img.navbarCoverImage {
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+div.left-div {
+    float: right;
+    height: 76px;
+    padding: 8px;
+}
+
+div.navbar-header {
+    height: 76px;
+    padding: 8px;
+}
+
+div.user-settings-wrapper {
+    margin: 0px;
+}
+
+span.userNameInHeader a {
+    color: #ffffff;
+    font-size: 25px;
+}
+
+img.wallPicture {
+    height: 120px;
+    width: 120px;
+}
+
+div[back-img] {
+    height: 300px;
+    background-size: 100%;
+    backgroundPosition: 'top center'
+}
+
+div.currentWallUserInfo {
+    padding-top: 15px;
+}
+
+div.navbar.navbar-inverse.set-radius-zero {
+    border: none;
 }
