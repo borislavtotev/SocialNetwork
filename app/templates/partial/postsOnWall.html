@@ -19,6 +19,21 @@
             </div>
             <div class="panel-footer">
                 Likes: {{ post.likesCount}} Comments: {{ post.totalCommentsCount }}
+                <button class="btn btn-info" ng-click="addComment()" ng-controller="PostController"><span class="glyphicon glyphicon-comment"></span> &nbsp;Comment</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-10 col-sm-4 comments" ng-if="addCommentEnabled" ng-controller="PostController">
+        <div class="panel panel-warning newComment" id="{{post.id + NewComment}}">
+            <div class="panel-heading">
+                New Comment
+            </div>
+            <div class="panel-body">
+                <textarea ng-model="newComment.content"></textarea>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-success" ng-click="saveNewComment(post)">Save</button>
+                <button class="btn btn-default" ng-click="cancelNewComment()">Cancel</button>
             </div>
         </div>
     </div>

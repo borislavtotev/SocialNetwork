@@ -37,5 +37,13 @@ SocialNetwork.factory('postServices', function ($http, baseServiceUrl, authentic
             .error(errorFunction);
     };
 
+    postServices.AddNewComment = function (postId, commentData, successFunction, errorFunction) {
+        $http.post(serviceUrl + "/" + postId + "/comments", {"commentContent" : commentData}, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data);
+            })
+            .error(errorFunction);
+    };
+
     return postServices;
 });

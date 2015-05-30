@@ -52,4 +52,27 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
                 noteServices.showError("Unsuccessful Deleted Post!", serverError)
             });
     };
+
+    $scope.addComment = function () {
+        $scope.$parent.addCommentEnabled = true;
+    };
+
+    $scope.cancelNewComment = function () {
+        $scope.$parent.$parent.addCommentEnabled = false;
+    };
+
+    $scope.saveNewComment = function (e) {
+        var id = e.id,
+            newCommentContent = $scope.newComment.content;
+        postServices.AddNewComment(id, newCommentContent,
+            function(newCommentData) {
+                noteServices.showInfo("Successful Added Comment!");
+                $scope.post.comments.push(newCommentData);
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Added Comment!", serverError)
+            });
+
+        $scope.cancelNewComment();
+    };
 });
