@@ -1,27 +1,28 @@
 <div ng-include="'templates/partial/header.html'"></div>
     <div class="content-wrapper">
-    <div class="user-settings-wrapper">
-        <div class="form-group has-feedback">
-            <div>
-                <input type="text" class="form-control" ng-model="searchMyFriendsString"/>
-                <i class="glyphicon glyphicon-search form-control-feedback" style="color: darkred"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6" ng-controller="ProfileController">
-        <div class="panel panel-default col-lg-12">
-            <div class="panel-heading">
-                Friends - {{ friends.length }} total
-            </div>
-            <div class="table panel-body">
-                <div class="label table-responsive col-lg-3"
-                     ng-class="{'new-row': startNewRow($index, columnBreak) }"
-                     ng-repeat="friend in friends | filter: searchMyFriendsString" ({{ $index + 1 }})>
-                    <span class="friendName">{{ friend['name'] }}</span>
-                    <img src="{{ friend['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded profilePicture"/>
+        <h4 class="page-head-line">{{pageTitle}}</h4>
+        <div class="user-settings-wrapper">
+            <div class="form-group has-feedback">
+                <div>
+                    <input type="text" class="form-control" ng-model="searchMyFriendsString"/>
+                    <i class="glyphicon glyphicon-search form-control-feedback" style="color: darkred"></i>
                 </div>
             </div>
         </div>
+        <div class="col-md-6" ng-controller="ProfileController">
+            <div class="panel panel-default col-lg-12">
+                <div class="panel-heading">
+                    Friends - {{ friends.length }} total
+                </div>
+                <div class="table panel-body">
+                    <div class="label table-responsive col-lg-3"
+                         ng-class="{'new-row': startNewRow($index, columnBreak) }"
+                         ng-repeat="friend in friends | filter: searchMyFriendsString" ({{ $index + 1 }})>
+                        <span class="friendName">{{ friend['name'] }}</span>
+                        <img src="{{ friend['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded profilePicture"/>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 

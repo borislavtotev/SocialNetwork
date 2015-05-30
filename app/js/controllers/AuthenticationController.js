@@ -8,6 +8,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
         $scope.registerData = "";
         $scope.userData = "";
         $scope.passwordData = "";
+        $scope.isLogged = false;
     };
 
     $scope.login = function () {

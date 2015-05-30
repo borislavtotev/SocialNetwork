@@ -32,18 +32,24 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                     }, function (error) {
                         noteServices.showError(error);
                     });
+                    $scope.pageTitle = 'My Friends';
                 } else if ($scope.currentUser.isFriend) {
                     authentication.GetUserFriends($scope.currentUserName, function (data) {
                         $scope.friends = data;
                     }, function (error) {
                         noteServices.showError(error);
                     });
+                    $scope.pageTitle = $scope.currentUser.name + '\'s Friends';
                 } else {
                     $scope.currentUser = {};
                     $scope.currentUserName = '';
                     $location.path('/home');
                 }
+
+                $scope.isWallPage = false;
             } else { // in the friend wall
+                $scope.pageTitle = "User Wall";
+                $scope.isWallPage = true;
                 authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
                     $scope.postsData = wallData;
                 }, function (error) {
@@ -54,13 +60,28 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
             noteServices.showError(error);
         });
     } else if (path.indexOf("home") != -1 && authentication.isLoggedIn()) {  // in the home
+        $scope.pageTitle = 'News Feed';
         profileServices.GetNewsFeeds(5, function (feedsData) {
             $scope.postsData = feedsData;
         }, function (error) {
             noteServices.showError(error);
         });
+
+        $scope.isWallPage = false;
     } else {
         $scope.currentUser = {};
         $scope.currentUserName = '';
+        $scope.isWallPage = false;
     }
+
+    console.log(path);
+    if ((path.indexOf("/profile") != -1) && authentication.isLoggedIn()) {
+        $scope.pageTitle = 'Edit Profile';
+    }
+
+    if ((path.indexOf("profile/password") != -1) && authentication.isLoggedIn()) {
+        $scope.pageTitle = 'Change Password';
+    }
+
+
 });

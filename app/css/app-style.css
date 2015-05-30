@@ -15,7 +15,7 @@ div.table-responsive {
 }
 
 .navbar {
-    height: 226px;
+    height: 85px;
 }
 
 #requestLink {
@@ -131,9 +131,16 @@ div[back-img] {
 }
 
 div.currentWallUserInfo {
-    padding-top: 15px;
+    margin-top: 30px;
+    margin-left: 50px;
+    text-align: left;
 }
 
 div.navbar.navbar-inverse.set-radius-zero {
     border: none;
+}
+
+h1 {
+    text-align: left;
+    padding-left: 50px;
 }
