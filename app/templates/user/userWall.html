@@ -1,32 +1,34 @@
 <div ng-include="'templates/partial/header.html'"></div>
 <div class="content-wrapper">
-    <h4 class="page-head-line">{{pageTitle}}</h4>
-    <div ng-include="'templates/partial/postsOnWall.html'"></div>
-    <div class="col-md-4" ng-if="currentUser.isFriend || currentUser.username == userData.username">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Add new post:
-            </div>
-            <div class="panel-body">
-                <form class="form-horizontal" name="postForm">
-                    <fieldset>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Message..." ng-model="postData.postContent"></textarea>
-                            <hr>
-                            <div>
-                                <a class="navbar-brand" href="#/home/">
-                                    <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
-                                </a>
-                                <span style="font-size: 15px;"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
+    <div class="container">
+        <h4 class="page-head-line">{{pageTitle}}</h4>
+        <div ng-include="'templates/partial/postsOnWall.html'"></div>
+        <div class="col-md-4" ng-if="currentUser.isFriend || currentUser.username == userData.username">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Add new post:
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" name="postForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" placeholder="Message..." ng-model="postData.postContent"></textarea>
+                                <hr>
+                                <div>
+                                    <a class="navbar-brand" href="#/home/">
+                                        <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                                    </a>
+                                    <span style="font-size: 15px;"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
+                                </div>
+                                <div ng-controller="PostController">
+                                    <button class="btn btn-info"  ng-click="addPost()"><span class="glyphicon glyphicon-send"></span> &nbsp;Submit</button>
+                                </div>
                             </div>
-                            <div ng-controller="PostController">
-                                <button class="btn btn-info"  ng-click="addPost()"><span class="glyphicon glyphicon-send"></span> &nbsp;Submit</button>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
+            <div ng-include="'templates/partial/friends.html'"></div>
         </div>
-        <div ng-include="'templates/partial/friends.html'"></div>
     </div>
 </div>

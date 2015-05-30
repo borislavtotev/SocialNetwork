@@ -1,5 +1,7 @@
 <div ng-include="'templates/partial/header.html'"></div>
 <div class="content-wrapper">
-    <div ng-include="'templates/partial/loginAndRegister.html'" ng-if="!isLogged"></div>
-    <div ng-include="'templates/user/userHomeScreen.html'" ng-if="isLogged"></div>
+    <div class="container">
+        <div ng-include="'templates/partial/loginAndRegister.html'" ng-if="!isLogged"></div>
+        <div ng-include="'templates/user/userHomeScreen.html'" ng-if="isLogged"></div>
+    </div>
 </div>
