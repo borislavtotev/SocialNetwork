@@ -2,8 +2,8 @@
 <div class="content-wrapper">
     <div class="container">
         <h4 class="page-head-line">{{pageTitle}}</h4>
-        <div ng-include="'templates/partial/postsOnWall.html'"></div>
-        <div class="col-md-4" ng-if="currentUser.isFriend || currentUser.username == userData.username">
+        <div class="col-lg-8" ng-include="'templates/partial/postsOnWall.html'"></div>
+        <div class="col-lg-4" ng-if="currentUser.isFriend || currentUser.username == userData.username">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Add new post:
