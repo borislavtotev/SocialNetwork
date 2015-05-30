@@ -61,20 +61,9 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
             .error(errorFunction);
     };
 
-    //function getNameFromProfile (userName, successFunction, errorFunction) {
-    //    $http.get(serviceUrl + '/' + userName, {headers: service.GetHeaders()})
-    //        .success(function (data) {
-    //            successFunction(data['name']);
-    //        })
-    //        .error(errorFunction);
-    //};
-
     service.SetCredentials = function (serverData) {
         localStorage['accessToken'] = serverData['access_token'];
         localStorage['userName'] = serverData['userName'];
-        //getNameFromProfile(serverData['userName'], function(name) {
-        //    localStorage['name'] = name;
-        //});
         localStorage['isAdmin'] = serverData.isAdmin ? serverData.isAdmin : false;
     };
 

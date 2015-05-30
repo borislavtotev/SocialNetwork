@@ -8,8 +8,8 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
                 noteServices.showInfo("Successful Posted Message");
                 authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
                     $scope.$parent.$parent.postsData = wallData;
-                    $scope.postData = {};
-                    $scope.postData.postContent = '';
+                    $scope.$parent.postData = {};
+                    $scope.$parent.postData.postContent = '';
                 }, function (error) {
                     noteServices.showError(error);
                 })

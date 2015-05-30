@@ -7,6 +7,8 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
         $scope.loginData = "";
         $scope.registerData = "";
         $scope.userData = "";
+        $scope.currentUser = "";
+        $scope.currentUserName = "";
         $scope.passwordData = "";
         $scope.isLogged = false;
     };
@@ -45,7 +47,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
         noteServices.showInfo("Successful Logout!");
         ClearData();
         authentication.ClearCredentials();
-        $location.path('/');
+        $route.reload();
     };
 
     $scope.showUserPreviewData = function (username) {
@@ -57,15 +59,4 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
                 noteServices.showError("Unable to get user data", serverError)
             });
     };
-    //
-    //$scope.clear = function () {
-    //    mainData.clearParams();
-    //    adminServices.clearParams();
-    //    $route.reload();
-    //};
-    //
-    //$scope.clearStatus = function () {
-    //    adServices.clearParams();
-    //    $route.reload();
-    //}
 });
