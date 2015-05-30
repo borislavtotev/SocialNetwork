@@ -1,5 +1,17 @@
-<div class="coverPageContainer col-lg-12" back-img="{{ currentUserName != '' ? currentUser['coverImageData'] : userData['coverImageData'] }}">
-    <div class="currentWallUserInfo col-lg-4" ng-if="currentUser">
+<div class="coverPageContainer col-lg-12" ng-if="currentUserName == userData.userName" back-img="{{ userData['coverImageData'] }}" >
+    <div class="currentWallUserInfo col-lg-4" ng-if="currentUserName != ''">
+        <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
+        <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
+    </div>
+</div>
+<div class="coverPageContainer col-lg-12" ng-if="currentUserName != userData.userName && currentUser['coverImageData']" back-img="{{ currentUser['coverImageData'] }}">
+    <div class="currentWallUserInfo col-lg-4" ng-if="currentUserName != ''">
+        <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
+        <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
+    </div>
+</div>
+<div class="coverPageContainer col-lg-12" ng-if="currentUserName != userData.userName && !currentUser['coverImageData']" style="background-color: #F0677C; padding-bottom: 20px">
+    <div class="currentWallUserInfo col-lg-4" ng-if="currentUserName != ''">
         <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
         <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
     </div>

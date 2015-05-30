@@ -1,9 +1,6 @@
 'use strict';
 
 SocialNetwork.controller('ProfileController', function ($scope, $location, authentication, profileServices, noteServices, fileReader) {
-
-    $scope.columnBreak = 3;//max number of cols
-
     $scope.startNewRow = function (index, count) {
         return ((index) % count) === 0;
     };

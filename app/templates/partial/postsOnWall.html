@@ -34,7 +34,7 @@
                 Likes: {{ post.likesCount}}
                 <button class="btn btn-default" ng-disabled="!post.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="unlikePost(post)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
                 Comments: {{ post.totalCommentsCount }}
-                <button class="btn btn-info" ng-click="addComment()" ng-controller="PostController"><span class="glyphicon glyphicon-comment"></span> &nbsp;Comment</button>
+                <button class="btn btn-info" ng-click="addComment()" ng-disabled="(currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-controller="PostController"><span class="glyphicon glyphicon-comment"></span> &nbsp;Comment</button>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="col-lg-12 comments">
-        <div class="panel panel-warning" ng-repeat="comment in post.comments | orderBy : comment.date" id="{{comment.id}}">
+        <div class="panel panel-warning" ng-repeat="comment in post.comments | orderBy : comment.date" id="{{post.id + '_' + comment.id}}">
             <div class="panel-heading col-lg-12">
                 <div class="col-lg-6">
                     <div class="dropdown" ng-controller="AuthenticationController">
@@ -68,15 +68,24 @@
                     <span>{{ comment.date  | date:'HH:mm:ss' }}</span>
                 </div>
                 <div class="col-lg-6 editDeleteButtons" ng-controller="PostController">
-                    <button class="btn btn-primary" ng-if="userData.name == comment.author.name" ng-click="editComment()"><i class="fa fa-edit "></i> Edit</button>
-                    <button class="btn btn-danger" ng-if="userData.name == comment.author.name" ng-click="deteleComment()"><i class="fa fa-pencil"></i> Delete</button>
+                    <button class="btn btn-primary" ng-if="userData.username == comment.author.username" ng-click="editComment(comment)"><i class="fa fa-edit "></i> Edit</button>
+                    <button class="btn btn-danger" ng-if="userData.username == comment.author.username || userData.username == post.author.username" ng-click="deleteComment(post.id, comment)"><i class="fa fa-pencil"></i> Delete</button>
                 </div>
             </div>
-            <div class="panel-body">
-                <p>{{ comment.commentContent}}</p>
+            <div class="panel-body" ng-controller="PostController">
+                <div class="col-lg-12">
+                    <p class="col-lg-12" ng-if="!commentEditorEnabled">{{ comment.commentContent}}</p>
+                    <textarea class="form-control" rows="5" ng-if="commentEditorEnabled" ng-model="comment.commentContent"></textarea>
+                </div>
+                <div class="col-lg-12 buttonsEditComment">
+                    <button class="btn btn-success" ng-if="commentEditorEnabled" ng-click="saveUpdatedComment(post.id, comment)">Save</button>
+                    <button class="btn btn-default" ng-if="commentEditorEnabled" ng-click="cancelEditComment()">Cancel</button>
+                </div>
             </div>
-            <div class="panel-footer">
+            <div class="panel-footer" ng-controller="PostController">
+                <button class="btn btn-default" ng-disabled="comment.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="likeComment(post.id, comment)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
                 Likes: {{ comment.likesCount}}
+                <button class="btn btn-default" ng-disabled="!comment.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="unlikeComment(post.id, comment)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
             </div>
         </div>
         <div ng-if="post.comments.length >= 3" ng-controller="PostController" class="moreComments" id="{{post.id + 'showMoreCommentsButton'}}">

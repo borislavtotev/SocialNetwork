@@ -3,6 +3,7 @@
 SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, postServices, noteServices) {
 
     $scope.startPage = 1;
+    $scope.pageSize = 10;
     $scope.username = authentication.GetUsername();
     $scope.isAdmin = authentication.GetIsAdmin();
     $scope.isNotAdmin = (!$scope.isAdmin || $scope.isAdmin == "false");
@@ -15,6 +16,22 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
             noteServices.showError(error);
         })
     }
+
+    var getMyFriends = function() {
+        profileServices.GetMyOwnFriends(function (data) {
+            $scope.friends = data;
+        }, function (error) {
+            noteServices.showError(error);
+        });
+    };
+
+    var getUserFriends = function () {
+        authentication.GetUserFriends($scope.currentUserName, function (data) {
+            $scope.friends = data;
+        }, function (error) {
+            noteServices.showError(error);
+        });
+    };
 
     var path = $location.path();
     if ((path.indexOf("home") == -1) && !authentication.isLoggedIn()) {
@@ -42,7 +59,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
             } else { // in the wall
                 $scope.pageTitle = "User Wall";
                 $scope.isWallPage = true;
-                authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
+                authentication.GetWallData($scope.currentUserName, $scope.pageSize, function(wallData) {
                     $scope.postsData = wallData;
                 }, function (error) {
                     noteServices.showError(error);
@@ -59,7 +76,8 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
         });
     } else if (path.indexOf("home") != -1 && authentication.isLoggedIn()) {  // in the home
         $scope.pageTitle = 'News Feed';
-        profileServices.GetNewsFeeds(5, function (feedsData) {
+        getMyFriends();
+        profileServices.GetNewsFeeds($scope.pageSize, function (feedsData) {
             $scope.postsData = feedsData;
         }, function (error) {
             noteServices.showError(error);
@@ -79,21 +97,4 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
     if ((path.indexOf("profile/password") != -1) && authentication.isLoggedIn()) {
         $scope.pageTitle = 'Change Password';
     }
-
-    var getMyFriends = function() {
-        profileServices.GetMyOwnFriends(function (data) {
-            $scope.friends = data;
-        }, function (error) {
-            noteServices.showError(error);
-        });
-    };
-
-    var getUserFriends = function () {
-        authentication.GetUserFriends($scope.currentUserName, function (data) {
-            $scope.friends = data;
-        }, function (error) {
-            noteServices.showError(error);
-        });
-    };
-
 });

@@ -69,8 +69,7 @@ span.friendName {
     margin: 0px;
 }
 
-div.left-div, div.container
-{
+div.left-div, div.container {
     margin: 0px;
 }
 
@@ -131,9 +130,9 @@ img.wallPicture {
 }
 
 div[back-img] {
-    height: 300px;
+    height: 200px;
     background-size: 100%;
-    backgroundPosition: 'top center'
+    backgroundPosition: 'top center';
 }
 
 div.currentWallUserInfo {
@@ -166,4 +165,8 @@ div.editDeleteButtons {
 
 div.buttonsEditComment {
     text-align: center;
+}
+
+div.allFriends {
+    margin-bottom: 5px;
 }

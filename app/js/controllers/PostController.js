@@ -57,6 +57,42 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
         $scope.$parent.$parent.addCommentEnabled = true;
     };
 
+    $scope.editComment = function (e) {
+        $scope.$parent.commentEditorEnabled = true;
+        $scope.$parent.editableCommentContent = e.commentContent;
+    };
+
+    $scope.saveUpdatedComment = function(postId, comment) {
+        var id = comment.id,
+            newCommentContent = comment.commentContent;
+        postServices.EditCommentById(postId, id, newCommentContent,
+            function() {
+                noteServices.showInfo("Successful Edited Comment");
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Edited Comment!", serverError)
+            });
+        $scope.cancelEditComment();
+    };
+
+    $scope.cancelEditComment = function(e) {
+        console.log('edit comment');
+        $scope.$parent.commentEditorEnabled = false;
+        $scope.$parent.$parent.commentEditorEnabled = false;
+        $scope.$parent.editableCommentContent = {};
+    };
+
+    $scope.deleteComment = function (postId, comment) {
+        postServices.DeleteCommentById(postId, comment.id,
+            function() {
+                noteServices.showInfo("Successful Deleted Comment!");
+                document.getElementById(postId + '_' + comment.id).remove();
+            },
+            function (serverError) {
+                noteServices.showError("Unsuccessful Deleted Comment!", serverError)
+            });
+    };
+
     $scope.cancelNewComment = function () {
         $scope.$parent.$parent.addCommentEnabled = false;
     };
@@ -113,6 +149,28 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
             },
             function (serverError) {
                 noteServices.showError("Unable to like this post!", serverError)
+            });
+    };
+
+    $scope.likeComment = function (postId, comment) {
+        postServices.LikeComment(postId, comment.id,
+            function(likesData) {
+                $scope.comment.likesCount = likesData.likesCount;
+                $scope.$parent.comment.liked = true;
+            },
+            function (serverError) {
+                noteServices.showError("Unable to like this comment!", serverError)
+            });
+    };
+
+    $scope.unlikeComment = function (postId, comment) {
+        postServices.UnlikeComment(postId, comment.id,
+            function(likesData) {
+                $scope.comment.likesCount = likesData.likesCount;
+                $scope.$parent.comment.liked = false;
+            },
+            function (serverError) {
+                noteServices.showError("Unable to unlike this comment!", serverError)
             });
     };
 });

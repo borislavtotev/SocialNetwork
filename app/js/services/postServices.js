@@ -53,6 +53,22 @@ SocialNetwork.factory('postServices', function ($http, baseServiceUrl, authentic
             .error(errorFunction);
     };
 
+    postServices.EditCommentById = function (postId, commentId, commentContent, successFunction, errorFunction) {
+        $http.put(serviceUrl + '/' + postId  + '/comments/' + commentId, {"commentContent" : commentContent}, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
+    postServices.DeleteCommentById = function (postId, commentId, successFunction, errorFunction) {
+        $http.delete(serviceUrl + '/' + postId  + '/comments/' + commentId, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
     postServices.LikePost = function (postId, successFunction, errorFunction) {
         $http.post(serviceUrl + "/" + postId + "/likes", {}, {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
@@ -63,6 +79,22 @@ SocialNetwork.factory('postServices', function ($http, baseServiceUrl, authentic
 
     postServices.UnlikePost = function (postId, successFunction, errorFunction) {
         $http.delete(serviceUrl + "/" + postId + "/likes", {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data);
+            })
+            .error(errorFunction);
+    };
+
+    postServices.LikeComment = function (postId, commendId, successFunction, errorFunction) {
+        $http.post(serviceUrl + "/" + postId + "/comments/" + commendId + "/likes", {}, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data);
+            })
+            .error(errorFunction);
+    };
+
+    postServices.UnlikeComment = function (postId, commendId, successFunction, errorFunction) {
+        $http.delete(serviceUrl + "/" + postId + "/comments/" + commendId + "/likes", {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
                 successFunction(data);
             })

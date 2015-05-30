@@ -2,25 +2,29 @@
 <div class="content-wrapper">
     <div class="container">
         <h4 class="page-head-line">{{pageTitle}}</h4>
-        <div class="user-settings-wrapper">
+        <div class="user-settings-wrapper col-lg-3">
             <div class="form-group has-feedback">
                 <div>
-                    <input type="text" class="form-control" ng-model="searchMyFriendsString"/>
+                    <input type="text" class="form-control" ng-model="searchMyFriendsString" placeholder="Filter friends..."/>
                     <i class="glyphicon glyphicon-search form-control-feedback" style="color: darkred"></i>
                 </div>
             </div>
         </div>
-        <div class="col-md-6" ng-controller="ProfileController">
-            <div class="panel panel-default col-lg-12">
+        <div class="col-lg-12" ng-controller="ProfileController">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Friends - {{ friends.length }} total
                 </div>
-                <div class="table panel-body">
-                    <div class="label table-responsive col-lg-3"
-                         ng-class="{'new-row': startNewRow($index, columnBreak) }"
-                         ng-repeat="friend in friends | filter: searchMyFriendsString" ({{ $index + 1 }})>
-                        <span class="friendName">{{ friend['name'] }}</span>
-                        <img src="{{ friend['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded profilePicture"/>
+                <div class="table panel-body col-lg-12">
+                    <div class="col-lg-4 allFriends" ng-repeat="friend in friends | filter: searchMyFriendsString">
+                        <div class="dropdown" ng-controller="AuthenticationController">
+                            <img class="dropdown-toggle wallPicture img-rounded" data-toggle="dropdown"
+                                 aria-expanded="false" ng-mouseover="showUserPreviewData(friend.username)"
+                                 ng-src="{{ friend.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" />
+                            <div class="dropdown-menu dropdown-settings" ng-include="'templates/partial/friendPreview.html'"
+                                 ng-if="preveiwedUserData.username != userData.username"></div>
+                            <span class="friendName" style="font-size: 20px"><a href="{{ '#/users/' + friend.username }}">{{ friend.name }}</a></span><br/>
+                        </div>
                     </div>
                 </div>
             </div>
