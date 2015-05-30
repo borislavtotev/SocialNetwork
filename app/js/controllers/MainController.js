@@ -1,6 +1,6 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, noteServices) {
+SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, postServices, noteServices) {
 
     $scope.startPage = 1;
     $scope.username = authentication.GetUsername();
@@ -31,6 +31,12 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
 
         authentication.GetUserFullData($scope.currentUserName, function(serverData) {
             $scope.currentUser = serverData;
+        }, function (error) {
+            noteServices.showError(error);
+        });
+    } else if (path.indexOf("home") != -1) {
+        profileServices.GetNewsFeeds(5, function (feedsData) {
+            $scope.postsData = feedsData;
         }, function (error) {
             noteServices.showError(error);
         });

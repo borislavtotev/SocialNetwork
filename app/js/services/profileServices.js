@@ -61,5 +61,13 @@ SocialNetwork.factory('profileServices', function ($http, baseServiceUrl, authen
             .error(errorFunction);
     };
 
+    profileServices.GetNewsFeeds = function (pageSize, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/feed?StartPostId=&PageSize=' + pageSize, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data)
+            })
+            .error(errorFunction);
+    };
+
     return profileServices;
 });
