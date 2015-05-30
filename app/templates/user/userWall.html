@@ -1,7 +1,7 @@
 <div ng-include="'templates/partial/header.html'"></div>
 <div class="content-wrapper">
     <div ng-include="'templates/partial/postsOnWall.html'"></div>
-    <div class="col-md-4">
+    <div class="col-md-4" ng-if="currentUser.isFriend || currentUser.username == userData.username">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Add new post:

@@ -53,6 +53,14 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
             .error(errorFunction);
     };
 
+    service.GetUserFriends = function (username, successFunction, errorFunction) {
+        $http.get(serviceUrl + '/' + username + '/friends', {headers: this.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data);
+            })
+            .error(errorFunction);
+    };
+
     //function getNameFromProfile (userName, successFunction, errorFunction) {
     //    $http.get(serviceUrl + '/' + userName, {headers: service.GetHeaders()})
     //        .success(function (data) {

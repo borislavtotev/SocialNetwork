@@ -21,20 +21,39 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
         $location.path('/');
     }
 
-    if (path.indexOf('/users/') != -1 && path.indexOf('friends') == -1 ) {
+    if (path.indexOf('/users/') != -1) { // in the users path
         $scope.currentUserName = path.split('/')[2];
-        authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
-            $scope.postsData = wallData;
-        }, function (error) {
-            noteServices.showError(error);
-        });
-
         authentication.GetUserFullData($scope.currentUserName, function(serverData) {
             $scope.currentUser = serverData;
+            if (path.indexOf('friends') != -1) { //in the friends page
+                if ($scope.currentUserName == $scope.username) {
+                    profileServices.GetMyOwnFriends(function (data) {
+                        $scope.friends = data;
+                    }, function (error) {
+                        noteServices.showError(error);
+                    });
+                } else if ($scope.currentUser.isFriend) {
+                    authentication.GetUserFriends($scope.currentUserName, function (data) {
+                        $scope.friends = data;
+                    }, function (error) {
+                        noteServices.showError(error);
+                    });
+                } else {
+                    $scope.currentUser = {};
+                    $scope.currentUserName = '';
+                    $location.path('/home');
+                }
+            } else { // in the friend wall
+                authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
+                    $scope.postsData = wallData;
+                }, function (error) {
+                    noteServices.showError(error);
+                });
+            }
         }, function (error) {
             noteServices.showError(error);
         });
-    } else if (path.indexOf("home") != -1) {
+    } else if (path.indexOf("home") != -1) {  // in the home
         profileServices.GetNewsFeeds(5, function (feedsData) {
             $scope.postsData = feedsData;
         }, function (error) {
