@@ -26,28 +26,20 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
         authentication.GetUserFullData($scope.currentUserName, function(serverData) {
             $scope.currentUser = serverData;
             if (path.indexOf('friends') != -1) { //in the friends page
-                if ($scope.currentUserName == $scope.username) {
-                    profileServices.GetMyOwnFriends(function (data) {
-                        $scope.friends = data;
-                    }, function (error) {
-                        noteServices.showError(error);
-                    });
+                if ($scope.currentUserName == $scope.username) { //my friends
+                    getMyFriends();
                     $scope.pageTitle = 'My Friends';
-                } else if ($scope.currentUser.isFriend) {
-                    authentication.GetUserFriends($scope.currentUserName, function (data) {
-                        $scope.friends = data;
-                    }, function (error) {
-                        noteServices.showError(error);
-                    });
+                } else if ($scope.currentUser.isFriend) {  //my friend's friends
+                    getUserFriends();
                     $scope.pageTitle = $scope.currentUser.name + '\'s Friends';
-                } else {
+                } else { // can't see friends of someone else who is not my friend
                     $scope.currentUser = {};
                     $scope.currentUserName = '';
                     $location.path('/home');
                 }
 
                 $scope.isWallPage = false;
-            } else { // in the friend wall
+            } else { // in the wall
                 $scope.pageTitle = "User Wall";
                 $scope.isWallPage = true;
                 authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
@@ -55,6 +47,12 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                 }, function (error) {
                     noteServices.showError(error);
                 });
+
+                if ($scope.currentUserName == $scope.username) { //my way
+                    getMyFriends();
+                } else {
+                    getUserFriends();
+                }
             }
         }, function (error) {
             noteServices.showError(error);
@@ -82,5 +80,20 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
         $scope.pageTitle = 'Change Password';
     }
 
+    var getMyFriends = function() {
+        profileServices.GetMyOwnFriends(function (data) {
+            $scope.friends = data;
+        }, function (error) {
+            noteServices.showError(error);
+        });
+    };
+
+    var getUserFriends = function () {
+        authentication.GetUserFriends($scope.currentUserName, function (data) {
+            $scope.friends = data;
+        }, function (error) {
+            noteServices.showError(error);
+        });
+    };
 
 });

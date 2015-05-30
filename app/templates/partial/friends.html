@@ -1,7 +1,7 @@
-<div ng-controller="ProfileController">
+<div ng-controller="MainController">
     <div class="panel panel-default col-lg-12">
         <div class="panel-heading">
-            <a href="#/users/{{ username }}/friends">Friends - {{ friends.length }} total</a>
+            <a href="#/users/{{ currentUser.username }}/friends">Friends - {{ friends.length }} total</a>
         </div>
         <div class="panel-body">
             <div class="table-responsive">
