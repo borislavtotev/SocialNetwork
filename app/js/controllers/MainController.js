@@ -74,7 +74,6 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
         $scope.isWallPage = false;
     }
 
-    console.log(path);
     if ((path.indexOf("/profile") != -1) && authentication.isLoggedIn()) {
         $scope.pageTitle = 'Edit Profile';
     }

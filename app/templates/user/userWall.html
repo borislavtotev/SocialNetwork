@@ -14,14 +14,12 @@
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" placeholder="Message..." ng-model="postData.postContent"></textarea>
                                 <hr>
-                                <div>
-                                    <a class="navbar-brand" href="#/home/">
-                                        <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
-                                    </a>
+                                <div class="col-lg-8">
+                                    <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
                                     <span style="font-size: 15px;"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
                                 </div>
-                                <div ng-controller="PostController">
-                                    <button class="btn btn-info"  ng-click="addPost()"><span class="glyphicon glyphicon-send"></span> &nbsp;Submit</button>
+                                <div class="col-log-4 submitPostButton" ng-controller="PostController">
+                                    <button class="btn btn-info"  ng-click="addPost()"><span class="glyphicon glyphicon-send"></span> &nbsp;Post</button>
                                 </div>
                             </div>
                         </fieldset>

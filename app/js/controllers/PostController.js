@@ -7,7 +7,7 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
             function() {
                 noteServices.showInfo("Successful Posted Message");
                 authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
-                    $scope.$parent.postsData = wallData;
+                    $scope.$parent.$parent.postsData = wallData;
                     $scope.postData = {};
                     $scope.postData.postContent = '';
                 }, function (error) {
@@ -54,7 +54,7 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
     };
 
     $scope.addComment = function () {
-        $scope.$parent.addCommentEnabled = true;
+        $scope.$parent.$parent.addCommentEnabled = true;
     };
 
     $scope.cancelNewComment = function () {

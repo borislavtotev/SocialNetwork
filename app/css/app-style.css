@@ -1,5 +1,6 @@
 div {
     box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 div.user-settings-wrapper {
@@ -85,9 +86,14 @@ img.dropdown-toggle.profilePicture.img-rounded:hover + div.dropdown-menu, img.dr
     display: block;
 }
 
+div.dropdown.userInfo {
+    width: 100%;
+}
+
 img.genderPicture {
     height: 40px;
     width: 40px;
+    margin-bottom: 20%;
 }
 
 header {
@@ -143,4 +149,21 @@ div.navbar.navbar-inverse.set-radius-zero {
 h1 {
     text-align: left;
     padding-left: 50px;
+}
+
+textarea.form-control {
+    margin: 5%;
+    width: 90%;
+}
+
+div.submitPostButton {
+    margin-top: 10%;
+}
+
+div.editDeleteButtons {
+    text-align: right;
+}
+
+div.buttonsEditComment {
+    text-align: center;
 }
