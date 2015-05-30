@@ -53,5 +53,21 @@ SocialNetwork.factory('postServices', function ($http, baseServiceUrl, authentic
             .error(errorFunction);
     };
 
+    postServices.LikePost = function (postId, successFunction, errorFunction) {
+        $http.post(serviceUrl + "/" + postId + "/likes", {}, {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data);
+            })
+            .error(errorFunction);
+    };
+
+    postServices.UnlikePost = function (postId, successFunction, errorFunction) {
+        $http.delete(serviceUrl + "/" + postId + "/likes", {headers: authentication.GetHeaders()})
+            .success(function (data, status, headers, config) {
+                successFunction(data);
+            })
+            .error(errorFunction);
+    };
+
     return postServices;
 });

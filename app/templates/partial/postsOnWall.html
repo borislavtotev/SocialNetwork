@@ -17,8 +17,11 @@
                 <button class="btn btn-success" ng-if="postEditorEnabled" ng-click="saveUpdatedPost(post)">Save</button>
                 <button class="btn btn-default" ng-if="postEditorEnabled" ng-click="cancelEditPost()">Cancel</button>
             </div>
-            <div class="panel-footer">
-                Likes: {{ post.likesCount}} Comments: {{ post.totalCommentsCount }}
+            <div class="panel-footer" ng-controller="PostController">
+                <button class="btn btn-default" ng-disabled="post.liked" ng-click="likePost(post)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                Likes: {{ post.likesCount}}
+                <button class="btn btn-default" ng-disabled="!post.liked" ng-click="unlikePost(post)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                Comments: {{ post.totalCommentsCount }}
                 <button class="btn btn-info" ng-click="addComment()" ng-controller="PostController"><span class="glyphicon glyphicon-comment"></span> &nbsp;Comment</button>
             </div>
         </div>

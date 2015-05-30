@@ -89,4 +89,30 @@ SocialNetwork.controller('PostController', function ($scope, $location, authenti
                 noteServices.showError("Unable to get all comments!", serverError)
             });
     };
+
+    $scope.likePost = function (e) {
+        var id = e.id;
+
+        postServices.LikePost(id,
+            function(likesData) {
+                $scope.post.likesCount = likesData.likesCount;
+                $scope.$parent.post.liked = true;
+            },
+            function (serverError) {
+                noteServices.showError("Unable to like this post!", serverError)
+            });
+    };
+
+    $scope.unlikePost = function (e) {
+        var id = e.id;
+
+        postServices.UnlikePost(id,
+            function(likesData) {
+                $scope.post.likesCount = likesData.likesCount;
+                $scope.$parent.post.liked = false;
+            },
+            function (serverError) {
+                noteServices.showError("Unable to like this post!", serverError)
+            });
+    };
 });
