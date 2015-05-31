@@ -22,8 +22,11 @@ SocialNetwork.controller('NavigationController', function ($scope, $location, au
             requestId = requestDiv[0].getAttribute('id');
 
             profileServices.ApproveFriendRequest(requestId, function(data) {
-                console.log(data);
-            })
+                noteServices.showInfo("Successfully Accepted Request!");
+                $scope.pendingRequests = $scope.pendingRequests - 1;
+            }, function (data) {
+                noteServices.showError("Unsuccessfully Accepted Request!");
+            });
     };
 
     $scope.reject = function (event) {
@@ -32,7 +35,10 @@ SocialNetwork.controller('NavigationController', function ($scope, $location, au
             requestId = requestDiv[0].getAttribute('id');
 
         profileServices.RejectFriendRequest(requestId, function(data) {
-            console.log(data);
+            noteServices.showInfo("Successfully Rejected Request!");
+            $scope.pendingRequests = $scope.pendingRequests - 1;
+        }, function (data) {
+            noteServices.showError("Unsuccessfully Rejected Request!");
         });
     };
 });

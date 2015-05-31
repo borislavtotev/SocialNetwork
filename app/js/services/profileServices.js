@@ -30,7 +30,7 @@ SocialNetwork.factory('profileServices', function ($http, baseServiceUrl, authen
     };
 
     profileServices.RejectFriendRequest = function (requestId, successFunction, errorFunction) {
-        $http.put(serviceUrl + '/requests/' + requestId + '?status=rejected', {headers: authentication.GetHeaders()})
+        $http.put(serviceUrl + '/requests/' + requestId + '?status=rejected', {}, {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
                 successFunction(data);
             })

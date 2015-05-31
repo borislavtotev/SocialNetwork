@@ -37,6 +37,7 @@ SocialNetwork.controller('ProfileController', function ($scope, $location, authe
         profileServices.sendFriendRequest(username,
             function(serverData) {
                 noteServices.showInfo("Successful Sent Friend Request!");
+                $scope.$parent.currentUser.hasPendingRequest = true;
             },
             function (serverError) {
                 noteServices.showError("Unsuccessful Sent Friend Request!", serverError)
