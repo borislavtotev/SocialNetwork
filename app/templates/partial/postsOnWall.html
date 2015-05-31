@@ -1,95 +1,104 @@
-<div class="posts col-lg-12" ng-repeat="post in postsData | orderBy : post.date">
-    <div class="col-lg-12">
-        <div class="panel panel-info" id="{{post.id}}">
-            <div class="panel-heading col-lg-12">
-                <div class="col-lg-6">
-                    <div class="dropdown" ng-controller="AuthenticationController">
-                        <img class="dropdown-toggle profilePicture img-rounded" data-toggle="dropdown"
-                             aria-expanded="false" ng-mouseover="showUserPreviewData(post.author.username)"
-                             ng-src="{{ post.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" />
-                        <div class="dropdown-menu dropdown-settings" ng-include="'templates/partial/friendPreview.html'"
-                             ng-if="preveiwedUserData.username != userData.username"></div>
-                        <span><a href="{{ '#/users/' + post.author.username }}">{{ post.author.name }}</a></span><br/>
+<div class="clearfix" infinite-scroll='getWallData.nextPage()' infinite-scroll-disabled='getWallData.busy' infinite-scroll-distance='1' ng-controller="MainController">
+    <div class="posts col-lg-12 clearfix" ng-repeat="post in getWallData.items | orderBy : post.date">
+        <div style="float: left;" class="col-lg-12">
+            <div class="panel panel-info" id="{{post.id}}">
+                <div class="panel-heading col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="dropdown" ng-controller="AuthenticationController">
+                            <img class="dropdown-toggle profilePicture img-rounded" data-toggle="dropdown"
+                                 aria-expanded="false" ng-mouseover="showUserPreviewData(post.author.username)"
+                                 ng-src="{{ post.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" />
+                            <div class="dropdown-menu dropdown-settings" ng-include="'templates/partial/friendPreview.html'"
+                                 ng-if="preveiwedUserData.username != userData.username"></div>
+                            <span><a href="{{ '#/users/' + post.author.username }}">{{ post.author.name }}</a></span><br/>
+                        </div>
+                        <span>{{ post.date  | date:'d MMM yyyy' }}</span>
+                        <span>{{ post.date  | date:'HH:mm:ss' }}</span>
                     </div>
-                    <span>{{ post.date  | date:'d MMM yyyy' }}</span>
-                    <span>{{ post.date  | date:'HH:mm:ss' }}</span>
-                </div>
-                <div class="col-lg-6 editDeleteButtons" ng-controller="PostController">
-                    <button class="btn btn-primary" ng-if="!postEditorEnabled && userData.name == post.author.name" ng-click="editPost(post)"><i class="fa fa-edit "></i> Edit</button>
-                    <button class="btn btn-danger" ng-if="!postEditorEnabled && userData.name == post.author.name" ng-click="deletePost(post)"><i class="fa fa-pencil"></i> Delete</button>
-                </div>
-            </div>
-            <div class="panel-body" ng-controller="PostController">
-                <div class="col-lg-12">
-                    <p class="col-lg-12" ng-if="!postEditorEnabled">{{ post.postContent}}</p>
-                    <textarea class="form-control" rows="5" ng-if="postEditorEnabled" ng-model="post.postContent"></textarea>
-                </div>
-                <div class="col-lg-12 buttonsEditComment">
-                    <button class="btn btn-success" ng-if="postEditorEnabled" ng-click="saveUpdatedPost(post)">Save</button>
-                    <button class="btn btn-default" ng-if="postEditorEnabled" ng-click="cancelEditPost()">Cancel</button>
-                </div>
-            </div>
-            <div class="panel-footer" ng-controller="PostController">
-                <button class="btn btn-default" ng-disabled="post.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="likePost(post)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                Likes: {{ post.likesCount}}
-                <button class="btn btn-default" ng-disabled="!post.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="unlikePost(post)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-                Comments: {{ post.totalCommentsCount }}
-                <button class="btn btn-info" ng-click="addComment()" ng-disabled="(currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-controller="PostController"><span class="glyphicon glyphicon-comment"></span> &nbsp;Comment</button>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12 comments" ng-controller="PostController" ng-if="addCommentEnabled" >
-        <div class="panel panel-warning newComment" id="{{post.id + 'NewComment'}}">
-            <div class="panel-heading">
-                New Comment
-            </div>
-            <div class="panel-body">
-                <textarea class="form-control" ng-model="newComment.content"></textarea>
-            </div>
-            <div class="panel-footer">
-                <button class="btn btn-success" ng-click="saveNewComment(post)">Save</button>
-                <button class="btn btn-default" ng-click="cancelNewComment()">Cancel</button>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12 comments">
-        <div class="panel panel-warning" ng-repeat="comment in post.comments | orderBy : comment.date" id="{{post.id + '_' + comment.id}}">
-            <div class="panel-heading col-lg-12">
-                <div class="col-lg-6">
-                    <div class="dropdown" ng-controller="AuthenticationController">
-                        <img class="dropdown-toggle profilePicture img-rounded" data-toggle="dropdown"
-                             aria-expanded="false" ng-mouseover="showUserPreviewData(comment.author.username)"
-                             ng-src="{{ comment.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" />
-                        <div class="dropdown-menu dropdown-settings" ng-include="'templates/partial/friendPreview.html'"
-                             ng-if="preveiwedUserData.username != userData.username"></div>
-                        <span><a href="{{ '#/users/' + comment.author.username }}">{{ comment.author.name }}</a></span><br/>
+                    <div class="col-lg-6 editDeleteButtons" ng-controller="PostController">
+                        <button class="btn btn-primary" ng-if="!postEditorEnabled && userData.name == post.author.name" ng-click="editPost(post)"><i class="fa fa-edit "></i> Edit</button>
+                        <button class="btn btn-danger" ng-if="!postEditorEnabled && userData.name == post.author.name" ng-click="deletePost(post)"><i class="fa fa-pencil"></i> Delete</button>
                     </div>
-                    <span>{{ comment.date  | date:'d MMM yyyy' }}</span>
-                    <span>{{ comment.date  | date:'HH:mm:ss' }}</span>
                 </div>
-                <div class="col-lg-6 editDeleteButtons" ng-controller="PostController">
-                    <button class="btn btn-primary" ng-if="userData.username == comment.author.username" ng-click="editComment(comment)"><i class="fa fa-edit "></i> Edit</button>
-                    <button class="btn btn-danger" ng-if="userData.username == comment.author.username || userData.username == post.author.username" ng-click="deleteComment(post.id, comment)"><i class="fa fa-pencil"></i> Delete</button>
+                <div class="panel-body" ng-controller="PostController">
+                    <div class="col-lg-12">
+                        <p class="col-lg-12" ng-if="!postEditorEnabled">{{ post.postContent}}</p>
+                        <textarea class="form-control" rows="5" ng-if="postEditorEnabled" ng-model="post.postContent"></textarea>
+                    </div>
+                    <div class="col-lg-12 buttonsEditComment">
+                        <button class="btn btn-success" ng-if="postEditorEnabled" ng-click="saveUpdatedPost(post)">Save</button>
+                        <button class="btn btn-default" ng-if="postEditorEnabled" ng-click="cancelEditPost()">Cancel</button>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-controller="PostController">
+                    <button class="btn btn-default" ng-disabled="post.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="likePost(post)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    Likes: {{ post.likesCount}}
+                    <button class="btn btn-default" ng-disabled="!post.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="unlikePost(post)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                    Comments: {{ post.totalCommentsCount }}
+                    <button class="btn btn-info" ng-click="addComment()" ng-disabled="(currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-controller="PostController"><span class="glyphicon glyphicon-comment"></span> &nbsp;Comment</button>
                 </div>
             </div>
-            <div class="panel-body" ng-controller="PostController">
-                <div class="col-lg-12">
-                    <p class="col-lg-12" ng-if="!commentEditorEnabled">{{ comment.commentContent}}</p>
-                    <textarea class="form-control" rows="5" ng-if="commentEditorEnabled" ng-model="comment.commentContent"></textarea>
-                </div>
-                <div class="col-lg-12 buttonsEditComment">
-                    <button class="btn btn-success" ng-if="commentEditorEnabled" ng-click="saveUpdatedComment(post.id, comment)">Save</button>
-                    <button class="btn btn-default" ng-if="commentEditorEnabled" ng-click="cancelEditComment()">Cancel</button>
-                </div>
-            </div>
-            <div class="panel-footer" ng-controller="PostController">
-                <button class="btn btn-default" ng-disabled="comment.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="likeComment(post.id, comment)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-                Likes: {{ comment.likesCount}}
-                <button class="btn btn-default" ng-disabled="!comment.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="unlikeComment(post.id, comment)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
-            </div>
+            <div style="clear: both;"></div>
         </div>
-        <div ng-if="post.comments.length >= 3" ng-controller="PostController" class="moreComments" id="{{post.id + 'showMoreCommentsButton'}}">
-            <button class="btn btn-default"  ng-click="showAllComments(post)"><span class="glyphicon glyphicon-collapse-down"></span> &nbsp;Show All Comments</button>
+        <div style="float: left;" class="col-lg-12 comments" ng-controller="PostController" ng-if="addCommentEnabled" >
+            <div class="panel panel-warning newComment" id="{{post.id + 'NewComment'}}">
+                <div class="panel-heading">
+                    New Comment
+                </div>
+                <div class="panel-body">
+                    <textarea class="form-control" ng-model="newComment.content"></textarea>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-success" ng-click="saveNewComment(post)">Save</button>
+                    <button class="btn btn-default" ng-click="cancelNewComment()">Cancel</button>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
         </div>
+        <div style="float: left;" class="col-lg-12 comments">
+            <div class="panel panel-warning" ng-repeat="comment in post.comments | orderBy : comment.date" id="{{post.id + '_' + comment.id}}">
+                <div class="panel-heading col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="dropdown" ng-controller="AuthenticationController">
+                            <img class="dropdown-toggle profilePicture img-rounded" data-toggle="dropdown"
+                                 aria-expanded="false" ng-mouseover="showUserPreviewData(comment.author.username)"
+                                 ng-src="{{ comment.author.profileImageData || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" />
+                            <div class="dropdown-menu dropdown-settings" ng-include="'templates/partial/friendPreview.html'"
+                                 ng-if="preveiwedUserData.username != userData.username"></div>
+                            <span><a href="{{ '#/users/' + comment.author.username }}">{{ comment.author.name }}</a></span><br/>
+                        </div>
+                        <span>{{ comment.date  | date:'d MMM yyyy' }}</span>
+                        <span>{{ comment.date  | date:'HH:mm:ss' }}</span>
+                    </div>
+                    <div class="col-lg-6 editDeleteButtons" ng-controller="PostController">
+                        <button class="btn btn-primary" ng-if="userData.username == comment.author.username" ng-click="editComment(comment)"><i class="fa fa-edit "></i> Edit</button>
+                        <button class="btn btn-danger" ng-if="userData.username == comment.author.username || userData.username == post.author.username" ng-click="deleteComment(post.id, comment)"><i class="fa fa-pencil"></i> Delete</button>
+                    </div>
+                </div>
+                <div class="panel-body" ng-controller="PostController">
+                    <div class="col-lg-12">
+                        <p class="col-lg-12" ng-if="!commentEditorEnabled">{{ comment.commentContent}}</p>
+                        <textarea class="form-control" rows="5" ng-if="commentEditorEnabled" ng-model="comment.commentContent"></textarea>
+                    </div>
+                    <div class="col-lg-12 buttonsEditComment">
+                        <button class="btn btn-success" ng-if="commentEditorEnabled" ng-click="saveUpdatedComment(post.id, comment)">Save</button>
+                        <button class="btn btn-default" ng-if="commentEditorEnabled" ng-click="cancelEditComment()">Cancel</button>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-controller="PostController">
+                    <button class="btn btn-default" ng-disabled="comment.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="likeComment(post.id, comment)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    Likes: {{ comment.likesCount}}
+                    <button class="btn btn-default" ng-disabled="!comment.liked || (currentUser.username == userData.username ? false : !currentUser.isFriend ) || ( userData.username == post.author.username ? false : !post.author.isFriend )" ng-click="unlikeComment(post.id, comment)"><span class="glyphicon glyphicon-thumbs-down"></span></button>
+                </div>
+            </div>
+            <div ng-if="post.comments.length >= 3" ng-controller="PostController" class="moreComments" id="{{post.id + 'showMoreCommentsButton'}}">
+                <button class="btn btn-default"  ng-click="showAllComments(post)"><span class="glyphicon glyphicon-collapse-down"></span> &nbsp;Show All Comments</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div style="clear: both;"></div>
     </div>
+    <div style="clear: both;"></div>
+    <div style="float: left;" ng-show='getWallData.busy'>Loading data...</div>
 </div>
+<div style="clear: both;"></div>

@@ -1,9 +1,9 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, postServices, noteServices) {
+SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, postServices, noteServices, infinityLoad) {
 
     $scope.startPage = 1;
-    $scope.pageSize = 10;
+    $scope.pageSize = 3;
     $scope.username = authentication.GetUsername();
     $scope.isAdmin = authentication.GetIsAdmin();
     $scope.isNotAdmin = (!$scope.isAdmin || $scope.isAdmin == "false");
@@ -57,11 +57,12 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                 $scope.pageTitle = 'News Feed';
                 getMyFriends();
                 $scope.currentUser = $scope.userData;
-                profileServices.GetNewsFeeds($scope.pageSize, function (feedsData) {
-                    $scope.postsData = feedsData;
-                }, function (error) {
-                    noteServices.showError(error);
-                });
+                $scope.getWallData = new infinityLoad();
+                //profileServices.GetNewsFeeds($scope.pageSize, function (feedsData) {
+                //    $scope.postsData = feedsData;
+                //}, function (error) {
+                //    noteServices.showError(error);
+                //});
 
                 $scope.isWallPage = false;
             } else {
