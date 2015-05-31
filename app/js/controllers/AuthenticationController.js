@@ -37,7 +37,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
                 noteServices.showInfo("Successful Register!");
                 authentication.SetCredentials(serverData);
                 ClearData();
-                $location.path('/home');
+                $location.path('/');
             },
             function (serverError) {
                 noteServices.showError("Unsuccessful Register!", serverError)

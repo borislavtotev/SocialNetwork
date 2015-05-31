@@ -41,7 +41,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, $route, 
 
                         if ($scope.currentUserName == $scope.username) { //my way
                             getMyFriends();
-                        } else {
+                        } else if($scope.currentUser.isFriend) {
                             getUserFriends();
                         }
                     }
@@ -69,22 +69,22 @@ SocialNetwork.controller('MainController', function ($scope, $location, $route, 
             }
         }, function (error) {
             noteServices.showError(error);
-        })
+        });
+
+        var getMyFriends = function() {
+            profileServices.GetMyOwnFriends(function (data) {
+                $scope.friends = data;
+            }, function (error) {
+                noteServices.showError(error);
+            });
+        };
+
+        var getUserFriends = function () {
+            authentication.GetUserFriends($scope.currentUserName, function (data) {
+                $scope.friends = data;
+            }, function (error) {
+                noteServices.showError(error);
+            });
+        };
     }
-
-    var getMyFriends = function() {
-        profileServices.GetMyOwnFriends(function (data) {
-            $scope.friends = data;
-        }, function (error) {
-            noteServices.showError(error);
-        });
-    };
-
-    var getUserFriends = function () {
-        authentication.GetUserFriends($scope.currentUserName, function (data) {
-            $scope.friends = data;
-        }, function (error) {
-            noteServices.showError(error);
-        });
-    };
 });

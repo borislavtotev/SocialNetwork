@@ -8,7 +8,7 @@
                     <div class="form-group" ng-controller="UploadController">
                         <label for="profileImage" class="col-md-3 control-label">Profile picture<br/>Limit: 128kb</label>
                         <div class="col-md-9">
-                            <img id="profileImagePreview" class="img-rounded center-block col-lg-12" ng-src="{{profileImage ? profileImage : userData.profileImageData}}""/>
+                            <img id="profileImagePreview" class="img-rounded center-block col-lg-12" ng-src="{{profileImage ? profileImage : userData.profileImageData}}"/>
                             <input type="file"  class="form-control" ng-model="profileImage" base-sixty-four-input
                                    id="profileImage" ng-file-select="onFileSelect($files)">
                         </div>
