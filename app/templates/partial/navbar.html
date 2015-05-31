@@ -16,7 +16,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="user-settings-wrapper">
+            <div class="user-settings-wrapper" ng-controller="ProfileController">
                 <ul class="nav">
                     <li class="dropdown">
                         <a id="requestLink" class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false">
@@ -24,7 +24,7 @@
                             <span class="newRequests">{{ pendingRequests }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-settings">
-                            <div ng-if="requests.length > 0" ng-repeat="request in requests" id="{{ request['id']}}">
+                            <div ng-if="pendingRequests > 0" ng-repeat="request in requests" id="{{ request['id']}}">
                                 <div class="media">
                                         <img ng-src="{{ request['user']['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded" />
                                     <div class="media-body">

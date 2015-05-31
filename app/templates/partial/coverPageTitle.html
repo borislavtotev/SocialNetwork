@@ -1,10 +1,10 @@
-<div class="coverPageContainer col-lg-12" ng-if="currentUserName == userData.username && userData['coverImageData'] != 'data:image/jpg;base64,''" back-img="{{ userData['coverImageData'] }}" >
+<div class="coverPageContainer col-lg-12" ng-if="currentUserName == userData.username && userData['coverImageData']" back-img="{{ userData['coverImageData'] }}" >
     <div class="currentWallUserInfo col-lg-4" ng-if="currentUserName != ''">
         <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
         <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
     </div>
 </div>
-<div class="coverPageContainer col-lg-12" ng-if="currentUserName == userData.username && userData['coverImageData'] == 'data:image/jpg;base64,'" style="background-color: #F0677C; padding-bottom: 20px">
+<div class="coverPageContainer col-lg-12" ng-if="currentUserName == userData.username && !userData['coverImageData']" style="background-color: #F0677C; padding-bottom: 20px">
     <div class="currentWallUserInfo col-lg-4" ng-if="currentUserName != ''">
         <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
         <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
@@ -19,7 +19,8 @@
             <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
             <button class="btn btn-success" ng-if="currentUser.isFriend" ng-disabled="true">Friend</button>
             <button class="btn btn-warning" ng-if="currentUser.hasPendingRequest" ng-disabled="true">Pending</button>
-            <button class="btn btn-primary" ng-if="currentUser && !currentUser.hasPendingRequest && !currentUser.isFriend" ng-click="sendFriendRequest(currentUser.username)">Invite</button>
+            <button class="btn btn-primary" ng-if="currentUser && !currentUser.hasPendingRequest && !hasPendingRequestFromUser(currentUser.username) && !currentUser.isFriend" ng-click="sendFriendRequest(currentUser.username)">Invite</button>
+            <button class="btn btn-warning" ng-if="hasPendingRequestFromUser(currentUser.username)" ng-disabled="true">Wait for approval</button>
         </div>
     </div>
 </div>
@@ -28,11 +29,12 @@
         <div class="col-lg-4">
             <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
         </div>
-        <div class="col-lg-8" ng-controller="ProfileController">
+        <div class="col-lg-8" ng-controller="MainController">
             <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
             <button class="btn btn-success" ng-if="currentUser.isFriend" ng-disabled="true">Friend</button>
             <button class="btn btn-warning" ng-if="currentUser.hasPendingRequest" ng-disabled="true">Pending</button>
-            <button class="btn btn-primary" ng-if="currentUser && !currentUser.hasPendingRequest && !currentUser.isFriend && currentUserName != userData.username" ng-click="sendFriendRequest(currentUser.username)">Invite</button>
+            <button class="btn btn-primary" ng-if="currentUser && !currentUser.hasPendingRequest && !hasPendingRequestFromUser(currentUser.username) && !currentUser.isFriend" ng-click="sendFriendRequest(currentUser.username)">Invite</button>
+            <button class="btn btn-warning" ng-if="hasPendingRequestFromUser(currentUser.username)" ng-disabled="true">Wait for approval</button>
         </div>
     </div>
 </div>
