@@ -89,6 +89,10 @@ img.dropdown-toggle.profilePicture.img-rounded:hover + div.dropdown-menu, img.dr
     display: block;
 }
 
+img.dropdown-toggle.wallPicture.img-rounded:hover + div.dropdown-menu, img.dropdown-toggle.wallPicture.img-rounded:focus + div.dropdown-menu {
+    display: block;
+}
+
 div.dropdown.userInfo {
     width: 100%;
 }

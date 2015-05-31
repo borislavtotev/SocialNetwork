@@ -14,6 +14,8 @@ SocialNetwork.controller('NavigationController', function ($scope, $location, au
     profileServices.GetFriendsRequests(function(data) {
         $scope.requests = data;
         $scope.pendingRequests = data.length;
+    }, function () {
+        noteServices.showError("Unable to get friends request!");
     });
 
     $scope.accept = function (event) {

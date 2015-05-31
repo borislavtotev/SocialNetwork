@@ -30,5 +30,9 @@ SocialNetwork.factory('infinityLoad', function($http, authentication, noteServic
             });
     };
 
+    InfinityLoad.addInTheBeginning = function(data) {
+        this.items.unshift(data);
+    };
+
     return InfinityLoad;
 });

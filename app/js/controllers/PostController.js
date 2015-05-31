@@ -1,18 +1,14 @@
 'use strict';
 
-SocialNetwork.controller('PostController', function ($scope, $location, authentication, postServices, noteServices) {
+SocialNetwork.controller('PostController', function ($scope, $location, $route, authentication, postServices, noteServices, infinityLoad) {
     $scope.addPost = function () {
         $scope.postData.username = $scope.currentUserName;
         postServices.AddNewPost($scope.postData,
-            function() {
+            function(postData) {
                 noteServices.showInfo("Successful Posted Message");
-                authentication.GetWallData($scope.currentUserName, 5, function(wallData) {
-                    $scope.$parent.$parent.postsData = wallData;
-                    $scope.$parent.postData = {};
-                    $scope.$parent.postData.postContent = '';
-                }, function (error) {
-                    noteServices.showError(error);
-                })
+                $route.reload();
+                $scope.$parent.postData = {};
+                $scope.$parent.postData.postContent = '';
             },
             function (serverError) {
                 noteServices.showError("Unsuccessful Posted Message!", serverError)
