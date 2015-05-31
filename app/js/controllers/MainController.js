@@ -38,11 +38,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                     } else { // in the wall
                         $scope.pageTitle = "User Wall";
                         $scope.isWallPage = true;
-                        authentication.GetWallData($scope.currentUserName, $scope.pageSize, function(wallData) {
-                            $scope.postsData = wallData;
-                        }, function (error) {
-                            noteServices.showError(error);
-                        });
+                        $scope.getWallData = new infinityLoad('/users/' + $scope.currentUserName + '/wall');
 
                         if ($scope.currentUserName == $scope.username) { //my way
                             getMyFriends();
@@ -57,13 +53,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                 $scope.pageTitle = 'News Feed';
                 getMyFriends();
                 $scope.currentUser = $scope.userData;
-                $scope.getWallData = new infinityLoad();
-                //profileServices.GetNewsFeeds($scope.pageSize, function (feedsData) {
-                //    $scope.postsData = feedsData;
-                //}, function (error) {
-                //    noteServices.showError(error);
-                //});
-
+                $scope.getWallData = new infinityLoad('/me/feed');
                 $scope.isWallPage = false;
             } else {
                 $scope.currentUser = {};

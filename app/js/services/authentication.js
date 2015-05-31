@@ -45,14 +45,6 @@ SocialNetwork.factory('authentication', function ($http, baseServiceUrl) {
             .error(errorFunction);
     };
 
-    service.GetWallData = function (userName, pageSize, successFunction, errorFunction) {
-        $http.get(serviceUrl + '/' + userName + '/wall?StartPostId=&PageSize=' + pageSize, {headers: this.GetHeaders()})
-            .success(function (data, status, headers, config) {
-                successFunction(data)
-            })
-            .error(errorFunction);
-    };
-
     service.GetUserFriends = function (username, successFunction, errorFunction) {
         $http.get(serviceUrl + '/' + username + '/friends', {headers: this.GetHeaders()})
             .success(function (data, status, headers, config) {

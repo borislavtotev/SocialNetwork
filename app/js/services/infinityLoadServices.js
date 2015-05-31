@@ -1,19 +1,18 @@
 'use strict';
 
 SocialNetwork.factory('infinityLoad', function($http, authentication, noteServices, baseServiceUrl) {
-    var serviceUrl = baseServiceUrl + '/me';
-
-    var InfinityLoad = function() {
+    var InfinityLoad = function(urlPath) {
         this.items = [];
         this.busy = false;
         this.after = '';
+        this.serviceUrl = baseServiceUrl + urlPath;
     };
 
     InfinityLoad.prototype.nextPage = function() {
         if (this.busy) return;
         this.busy = true;
 
-        $http.get(serviceUrl + '/feed?StartPostId=' + this.after + '&PageSize=' + 3, {headers: authentication.GetHeaders()})
+        $http.get(this.serviceUrl + '?StartPostId=' + this.after + '&PageSize=' + 3, {headers: authentication.GetHeaders()})
             .success(function (data, status, headers, config) {
                 var items = data;
                 for (var i = 0; i < items.length; i++) {
