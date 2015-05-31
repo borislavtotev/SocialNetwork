@@ -15,7 +15,7 @@
                                 <textarea class="form-control" rows="3" placeholder="Message..." ng-model="postData.postContent"></textarea>
                                 <hr>
                                 <div class="col-lg-8">
-                                    <img src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                                    <img ng-src="{{ userData.profileImageData ? userData.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png' }}" class="profilePicture img-rounded" />
                                     <span style="font-size: 15px;"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
                                 </div>
                                 <div class="col-log-4 submitPostButton" ng-controller="PostController">

@@ -7,6 +7,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
         $scope.loginData = "";
         $scope.registerData = "";
         $scope.userData = "";
+        $scope.username = "";
         $scope.currentUser = "";
         $scope.currentUserName = "";
         $scope.passwordData = "";
@@ -22,7 +23,7 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
                 if(authentication.GetIsAdmin() == "true") {
                     $location.path('/admin/home');
                 } else {
-                    $location.path('/user/home');
+                    $location.path('/');
                 }
             },
             function (serverError) {
@@ -45,8 +46,9 @@ SocialNetwork.controller('AuthenticationController', function ($scope, $location
 
     $scope.logout = function () {
         noteServices.showInfo("Successful Logout!");
-        ClearData();
         authentication.ClearCredentials();
+        ClearData();
+        $location.path('/home');
         $route.reload();
     };
 

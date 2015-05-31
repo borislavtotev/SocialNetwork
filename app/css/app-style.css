@@ -81,6 +81,10 @@ img.dropdown-toggle.profilePicture.img-rounded:hover {
     cursor: pointer;
 }
 
+img.dropdown-toggle.wallPicture.img-rounded:hover {
+    cursor: pointer;
+}
+
 img.dropdown-toggle.profilePicture.img-rounded:hover + div.dropdown-menu, img.dropdown-toggle.profilePicture.img-rounded:focus + div.dropdown-menu {
     display: block;
 }

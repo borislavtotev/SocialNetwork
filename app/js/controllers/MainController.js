@@ -1,27 +1,26 @@
 'use strict';
 
-SocialNetwork.controller('MainController', function ($scope, $location, authentication, profileServices, postServices, noteServices, infinityLoad) {
+SocialNetwork.controller('MainController', function ($scope, $location, $route, authentication, profileServices, postServices, noteServices, infinityLoad) {
 
-    $scope.startPage = 1;
-    $scope.pageSize = 3;
     $scope.username = authentication.GetUsername();
     $scope.isAdmin = authentication.GetIsAdmin();
     $scope.isNotAdmin = (!$scope.isAdmin || $scope.isAdmin == "false");
     $scope.path = $location.path();
-    if ($scope.username) {
-        $scope.isLogged = true;
+    $scope.isLogged = authentication.isLoggedIn();
+
+    if ($scope.path != '/home' && !$scope.isLogged) {
+        $location.path('/home');
+    }
+
+    if ($scope.isLogged) {
         profileServices.GetMyData(function (serverData) {
             $scope.userData = serverData;
-            var path = $location.path();
-            if ((path.indexOf("home") == -1) && !authentication.isLoggedIn()) {
-                $location.path('/');
-            }
 
-            if (path.indexOf('/users/') != -1) { // in the users path
-                $scope.currentUserName = path.split('/')[2];
+            if ($scope.path.indexOf('/users/') != -1) { // in the users path
+                $scope.currentUserName = $scope.path.split('/')[2];
                 authentication.GetUserFullData($scope.currentUserName, function(serverData) {
                     $scope.currentUser = serverData;
-                    if (path.indexOf('friends') != -1) { //in the friends page
+                    if ($scope.path.indexOf('friends') != -1) { //in the friends page
                         if ($scope.currentUserName == $scope.username) { //my friends
                             getMyFriends();
                             $scope.pageTitle = 'My Friends';
@@ -49,7 +48,7 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                 }, function (error) {
                     noteServices.showError(error);
                 });
-            } else if (path.indexOf("home") != -1 && authentication.isLoggedIn()) {  // in the home
+            } else if ($scope.path == '/home') {  // in the home
                 $scope.pageTitle = 'News Feed';
                 getMyFriends();
                 $scope.currentUser = $scope.userData;
@@ -61,11 +60,11 @@ SocialNetwork.controller('MainController', function ($scope, $location, authenti
                 $scope.isWallPage = false;
             }
 
-            if ((path.indexOf("/profile") != -1) && authentication.isLoggedIn()) {
+            if ($scope.path.indexOf("/profile") != -1) {
                 $scope.pageTitle = 'Edit Profile';
             }
 
-            if ((path.indexOf("profile/password") != -1) && authentication.isLoggedIn()) {
+            if ($scope.path.indexOf("profile/password") != -1) {
                 $scope.pageTitle = 'Change Password';
             }
         }, function (error) {

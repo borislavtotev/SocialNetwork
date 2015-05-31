@@ -18,7 +18,11 @@ SocialNetwork.factory('infinityLoad', function($http, authentication, noteServic
                 for (var i = 0; i < items.length; i++) {
                     this.items.push(items[i]);
                 }
-                this.after = this.items[this.items.length - 1].id;
+
+                if (data.length) {
+                    this.after = this.items[this.items.length - 1].id;
+                }
+
                 this.busy = false;
             }.bind(this))
             .error(function (serverError) {

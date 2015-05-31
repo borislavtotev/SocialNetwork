@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-header">
             <a href="#/home/">
-                <img ng-src="{{ userData['profileImageData'] ? userData['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
+                <img ng-src="{{ userData.profileImageData ? userData.profileImageData : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="profilePicture img-rounded" />
             </a>
             <span class="userNameInHeader"><a href="#/users/{{ userData.username }}">{{ userData.name }}</a></span>
         </div>
@@ -62,7 +62,7 @@
             <div class="user-settings-wrapper" ng-controller="AuthenticationController">
                 <ul class="nav">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#/" aria-expanded="false" ng-click="logout()">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="" aria-expanded="false" ng-click="logout()">
                             <span class="glyphicon glyphicon-log-out" style="font-size: 25px;"></span>
                         </a>
                     </li>
