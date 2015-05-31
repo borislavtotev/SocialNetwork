@@ -29,7 +29,7 @@
         <div class="col-lg-4">
             <img ng-if="currentUserName != ''" ng-src="{{ currentUser['profileImageData'] ? currentUser['profileImageData'] : 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="wallPicture img-rounded" />
         </div>
-        <div class="col-lg-8" ng-controller="MainController">
+        <div class="col-lg-8" ng-controller="ProfileController">
             <span ng-if="currentUserName != ''" style="font-size: 35px;">{{ currentUser.name }}</span>
             <button class="btn btn-success" ng-if="currentUser.isFriend" ng-disabled="true">Friend</button>
             <button class="btn btn-warning" ng-if="currentUser.hasPendingRequest" ng-disabled="true">Pending</button>

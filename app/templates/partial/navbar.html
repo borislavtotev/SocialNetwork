@@ -28,7 +28,7 @@
                                 <div class="media">
                                         <img ng-src="{{ request['user']['profileImageData'] || 'http://www.clker.com/cliparts/5/7/4/8/13099629981030824019profile.svg.med.png'}}" class="img-rounded" />
                                     <div class="media-body">
-                                        <h4 class="media-heading"> {{ request['user']['name'] }}</h4>
+                                        <h4 class="media-heading"><a href="{{'#/users/' + request['user']['username'] }}">{{ request['user']['name'] }}</a></h4>
                                     </div>
                                 </div>
                                 <hr />
